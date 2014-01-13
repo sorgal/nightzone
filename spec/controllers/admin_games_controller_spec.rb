@@ -19,7 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe AdminGamesController do
-
+  login_admin
   # This should return the minimal set of attributes required to create a valid
   # AdminGame. As you add validations to AdminGame, be sure to
   # adjust the attributes here as well.
@@ -30,130 +30,26 @@ describe AdminGamesController do
   # AdminGamesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all admin_games as @admin_games" do
-      admin_game = AdminGame.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:admin_games)).to eq([admin_game])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested admin_game as @admin_game" do
-      admin_game = AdminGame.create! valid_attributes
-      get :show, {:id => admin_game.to_param}, valid_session
-      expect(assigns(:admin_game)).to eq(admin_game)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new admin_game as @admin_game" do
-      get :new, {}, valid_session
-      expect(assigns(:admin_game)).to be_a_new(AdminGame)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested admin_game as @admin_game" do
-      admin_game = AdminGame.create! valid_attributes
-      get :edit, {:id => admin_game.to_param}, valid_session
-      expect(assigns(:admin_game)).to eq(admin_game)
-    end
+  before do
+    @game = FactoryGirl.create(:game)
+    @admin_game = FactoryGirl.create(:admin_game, admin_id: @admin_id, game_id: @game.to_param)
   end
 
   describe "POST create" do
     describe "with valid params" do
       it "creates a new AdminGame" do
         expect {
-          post :create, {:admin_game => valid_attributes}, valid_session
+          post :create, {:admin_game => @admin_game.attributes}, valid_session
         }.to change(AdminGame, :count).by(1)
-      end
-
-      it "assigns a newly created admin_game as @admin_game" do
-        post :create, {:admin_game => valid_attributes}, valid_session
-        expect(assigns(:admin_game)).to be_a(AdminGame)
-        expect(assigns(:admin_game)).to be_persisted
-      end
-
-      it "redirects to the created admin_game" do
-        post :create, {:admin_game => valid_attributes}, valid_session
-        expect(response).to redirect_to(AdminGame.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved admin_game as @admin_game" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        AdminGame.any_instance.stub(:save).and_return(false)
-        post :create, {:admin_game => { "admin_id" => "invalid value" }}, valid_session
-        expect(assigns(:admin_game)).to be_a_new(AdminGame)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        AdminGame.any_instance.stub(:save).and_return(false)
-        post :create, {:admin_game => { "admin_id" => "invalid value" }}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested admin_game" do
-        admin_game = AdminGame.create! valid_attributes
-        # Assuming there are no other admin_games in the database, this
-        # specifies that the AdminGame created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(AdminGame).to receive(:update).with({ "admin_id" => "1" })
-        put :update, {:id => admin_game.to_param, :admin_game => { "admin_id" => "1" }}, valid_session
-      end
-
-      it "assigns the requested admin_game as @admin_game" do
-        admin_game = AdminGame.create! valid_attributes
-        put :update, {:id => admin_game.to_param, :admin_game => valid_attributes}, valid_session
-        expect(assigns(:admin_game)).to eq(admin_game)
-      end
-
-      it "redirects to the admin_game" do
-        admin_game = AdminGame.create! valid_attributes
-        put :update, {:id => admin_game.to_param, :admin_game => valid_attributes}, valid_session
-        expect(response).to redirect_to(admin_game)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the admin_game as @admin_game" do
-        admin_game = AdminGame.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        AdminGame.any_instance.stub(:save).and_return(false)
-        put :update, {:id => admin_game.to_param, :admin_game => { "admin_id" => "invalid value" }}, valid_session
-        expect(assigns(:admin_game)).to eq(admin_game)
-      end
-
-      it "re-renders the 'edit' template" do
-        admin_game = AdminGame.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        AdminGame.any_instance.stub(:save).and_return(false)
-        put :update, {:id => admin_game.to_param, :admin_game => { "admin_id" => "invalid value" }}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested admin_game" do
-      admin_game = AdminGame.create! valid_attributes
       expect {
-        delete :destroy, {:id => admin_game.to_param}, valid_session
+        delete :destroy, {:id => @admin_game.to_param}, valid_session
       }.to change(AdminGame, :count).by(-1)
-    end
-
-    it "redirects to the admin_games list" do
-      admin_game = AdminGame.create! valid_attributes
-      delete :destroy, {:id => admin_game.to_param}, valid_session
-      expect(response).to redirect_to(admin_games_url)
     end
   end
 

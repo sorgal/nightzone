@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "admin_games/show" do
+describe "user_games/show" do
   before(:each) do
-    @admin_game = assign(:admin_game, stub_model(AdminGame,
-      :admin_id => 1,
+    @user_game = assign(:user_game, stub_model(UserGame,
+      :user_id => 1,
       :game_id => 2
     ))
   end

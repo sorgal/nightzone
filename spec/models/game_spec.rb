@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Game do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "games validation checking" do
+    game_1 = FactoryGirl.create(:game)
+
+    game_1.should be_valid
+  end
 end

@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe "admin_games/index" do
+describe "user_games/index" do
   before(:each) do
-    assign(:admin_games, [
-      stub_model(AdminGame,
-        :admin_id => 1,
+    assign(:user_games, [
+      stub_model(UserGame,
+        :user_id => 1,
         :game_id => 2
       ),
-      stub_model(AdminGame,
-        :admin_id => 1,
+      stub_model(UserGame,
+        :user_id => 1,
         :game_id => 2
       )
     ])
   end
 
-  it "renders a list of admin_games" do
+  it "renders a list of user_games" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => 1.to_s, :count => 2
