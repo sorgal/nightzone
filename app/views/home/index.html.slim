@@ -1,0 +1,8 @@
+- if user_signed_in?
+  div id="main"
+    p
+      span class="redbox" Some protected text
+- else
+  div id="main"
+    p
+      span class="redbox" Some public text

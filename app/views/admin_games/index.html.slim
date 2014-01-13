@@ -1,0 +1,21 @@
+h1 Listing admin_games
+
+table
+  tr
+    th Admin
+    th Game
+    th
+    th
+    th
+
+  - @admin_games.each do |admin_game|
+    tr
+      td = admin_game.admin_id
+      td = admin_game.game_id
+      td = link_to 'Show', admin_game
+      td = link_to 'Edit', edit_admin_game_path(admin_game)
+      td = link_to 'Destroy', admin_game, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Admin game', new_admin_game_path

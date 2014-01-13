@@ -1,0 +1,27 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$width: 97%
+
+$translucent-red: rgba(255, 0, 0, 0.5)
+
+@mixin large-text
+  //font: 12px/30px
+  font:
+    family: Arial
+    size: 25px
+    weight: bold
+
+  color: opacify($translucent-red, 0.3)
+  background-color: transparentize($translucent-red, 0.25)
+
+
+#main
+  width: 1in + 8pt
+  p, div
+    margin: (1px 2px) (5px 6px)
+    @include large-text
+    span
+      font:
+        weight: bold
