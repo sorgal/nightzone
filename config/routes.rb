@@ -1,10 +1,37 @@
 Nightzone::Application.routes.draw do
-  resources :admin_games
+
+  controller :code_compares do
+    post 'code_compares/', :to => 'code_compares#create'
+    delete 'code_compares/:id', :to => 'code_compares#destroy'
+  end
+
+  controller :game_codes do
+    post 'game_codes/', :to => 'game_codes#create'
+    delete 'game_codes/:id', :to => 'game_codes#destroy'
+  end
+
+  resources :codes
+
+  controller :game_hints do
+    post 'game_hints/', :to => 'game_hints#create'
+    delete 'game_hints/:id', :to => 'game_hints#destroy'
+  end
+
+  resources :user_games
+
+  resources :hints
+
+  controller :admin_games do
+    post 'admin_games/', :to => 'admin_games#create'
+    delete 'admin_games/:id', :to => 'admin_games#destroy'
+  end
 
   resources :games
 
   devise_for :users
   get "home/index"
+  get "home/game_code_compares"
+  post "home/create_code_compare"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

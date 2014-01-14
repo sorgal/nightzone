@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140112202805) do
+ActiveRecord::Schema.define(version: 20140114124729) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -53,12 +53,55 @@ ActiveRecord::Schema.define(version: 20140112202805) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "code_compares", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "code_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "codes", force: true do |t|
+    t.string   "code_string"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_codes", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "code_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_hints", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "hint_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "games", force: true do |t|
     t.string   "title"
     t.datetime "start_date"
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "state",      default: -1
+  end
+
+  create_table "hints", force: true do |t|
+    t.text     "hint_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "queue_number"
+  end
+
+  create_table "user_games", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "result",     default: 0
   end
 
   create_table "users", force: true do |t|

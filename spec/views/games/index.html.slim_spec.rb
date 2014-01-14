@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe "games/index" do
-  before(:each) do
+  before do
+    game1 = FactoryGirl.create(:game)
+    game2 = FactoryGirl.create(:game, :title => "game_test_title")
     assign(:games, [
-      stub_model(Game),
-      stub_model(Game)
+        game1, game2
+    #stub_model Game, :id => game2.to_param
     ])
   end
 
