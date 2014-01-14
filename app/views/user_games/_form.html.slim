@@ -1,15 +1,17 @@
-= form_for @user_game do |f|
-  - if @user_game.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user_game.errors.count, "error")} prohibited this user_game from being saved:"
-      ul
-        - @user_game.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :game_id
-    = f.number_field :game_id
-  .actions = f.submit 'Save'
+= form_for @user_game, :html => { :class => "form-horizontal" } do |f|
+  .control-group
+    = f.label :user_id, :class => 'control-label'
+    .controls
+      = f.text_field :user_id, :class => 'text_field'
+  .control-group
+    = f.label :game_id, :class => 'control-label'
+    .controls
+      = f.text_field :game_id, :class => 'text_field'
+  .control-group
+    = f.label :result, :class => 'control-label'
+    .controls
+      = f.text_field :result, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), user_games_path, :class => 'btn'

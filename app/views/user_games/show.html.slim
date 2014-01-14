@@ -1,12 +1,23 @@
-p#notice = notice
+- model_class = UserGame
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.titleize
 
 p
-  strong User:
+  strong= model_class.human_attribute_name(:user_id) + ':'
+  br
   = @user_game.user_id
 p
-  strong Game:
+  strong= model_class.human_attribute_name(:game_id) + ':'
+  br
   = @user_game.game_id
+p
+  strong= model_class.human_attribute_name(:result) + ':'
+  br
+  = @user_game.result
 
-= link_to 'Edit', edit_user_game_path(@user_game)
-'|
-= link_to 'Back', user_games_path
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), user_games_path, :class => 'btn'
+  '
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_game_path(@user_game), :class => 'btn'
+  '
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), user_game_path(@user_game), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

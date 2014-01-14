@@ -3,6 +3,7 @@ class CodesController < ApplicationController
   before_filter :check_game, only: [:new]
   before_filter :check_game_create, only: [:create]
   before_filter :no_codes, except: [:new, :create]
+
   # GET /codes
   # GET /codes.json
   def index

@@ -20,6 +20,7 @@ require 'spec_helper'
 
 describe UserGamesController do
   login_user
+  render_views
   # This should return the minimal set of attributes required to create a valid
   # UserGame. As you add validations to UserGame, be sure to
   # adjust the attributes here as well.
@@ -79,9 +80,9 @@ describe UserGamesController do
         expect(assigns(:user_game)).to be_persisted
       end
 
-      it "redirects to the created user_game" do
+      it "redirects to the created users games list" do
         post :create, {:user_game => @user_game.attributes}, valid_session
-        expect(response).to redirect_to(UserGame.last)
+        expect(response).to redirect_to(user_games_url)
       end
     end
 
@@ -93,11 +94,11 @@ describe UserGamesController do
         expect(assigns(:user_game)).to be_a_new(UserGame)
       end
 
-      it "re-renders the 'new' template" do
+      it "redirect the root template" do
         # Trigger the behavior that occurs when invalid params are submitted
         UserGame.any_instance.stub(:save).and_return(false)
         post :create, {:user_game => @invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(root_path)
       end
     end
   end

@@ -1,5 +1,10 @@
 Nightzone::Application.routes.draw do
 
+  controller :code_compares do
+    post 'code_compares/', :to => 'code_compares#create'
+    delete 'code_compares/:id', :to => 'code_compares#destroy'
+  end
+
   controller :game_codes do
     post 'game_codes/', :to => 'game_codes#create'
     delete 'game_codes/:id', :to => 'game_codes#destroy'
@@ -25,6 +30,8 @@ Nightzone::Application.routes.draw do
 
   devise_for :users
   get "home/index"
+  get "home/game_code_compares"
+  post "home/create_code_compare"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

@@ -1,5 +1,4 @@
-h1 New user_game
-
-== render 'form'
-
-= link_to 'Back', user_games_path
+- model_class = UserGame
+div class="page-header"
+  h1=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize
+= render :partial => "form"
