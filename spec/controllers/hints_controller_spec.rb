@@ -34,7 +34,7 @@ describe HintsController do
     queue_number = rand(1...2)
     @game = FactoryGirl.create(:game)
     @hint = FactoryGirl.create(:hint, queue_number: queue_number)
-    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "").attributes
+    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "акпыук").attributes
   end
 
   describe "GET index" do

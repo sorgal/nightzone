@@ -32,7 +32,7 @@ describe GamesController do
 
   before do
     @game = FactoryGirl.create(:game)
-    @invalid_attributes = FactoryGirl.build(:game, title: "", start_date: "01.01.2014 00:00:00".to_datetime, duration: 11).attributes
+    @invalid_attributes = FactoryGirl.build(:game, title: "впирапеи", start_date: "01.01.2014 00:00:00".to_datetime, duration: 11).attributes
   end
 
   describe "GET index" do

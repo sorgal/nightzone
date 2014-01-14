@@ -1,8 +1,15 @@
 Nightzone::Application.routes.draw do
 
+  controller :game_codes do
+    post 'game_codes/', :to => 'game_codes#create'
+    delete 'game_codes/:id', :to => 'game_codes#destroy'
+  end
+
+  resources :codes
+
   controller :game_hints do
-    post 'create' => :create
-    delete 'destroy' => :destroy
+    post 'game_hints/', :to => 'game_hints#create'
+    delete 'game_hints/:id', :to => 'game_hints#destroy'
   end
 
   resources :user_games
@@ -10,8 +17,8 @@ Nightzone::Application.routes.draw do
   resources :hints
 
   controller :admin_games do
-    post 'create' => :create
-    delete 'destroy' => :destroy
+    post 'admin_games/', :to => 'admin_games#create'
+    delete 'admin_games/:id', :to => 'admin_games#destroy'
   end
 
   resources :games

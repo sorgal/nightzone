@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113101225) do
+ActiveRecord::Schema.define(version: 20140113170656) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -53,6 +53,19 @@ ActiveRecord::Schema.define(version: 20140113101225) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "codes", force: true do |t|
+    t.string   "code_string"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_codes", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "code_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "game_hints", force: true do |t|
     t.integer  "game_id"
     t.integer  "hint_id"
@@ -66,7 +79,6 @@ ActiveRecord::Schema.define(version: 20140113101225) do
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "result"
   end
 
   create_table "hints", force: true do |t|

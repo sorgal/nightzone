@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "games/index" do
-  before(:each) do
+  before do
     game1 = FactoryGirl.create(:game)
     game2 = FactoryGirl.create(:game, :title => "game_test_title")
     assign(:games, [

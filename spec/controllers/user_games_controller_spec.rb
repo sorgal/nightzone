@@ -33,8 +33,8 @@ describe UserGamesController do
   before do
     @game = FactoryGirl.create(:game)
     result = rand(-1..1)
-    @user_game = FactoryGirl.build(:user_game, user_id: @user_id, game_id: @game.to_param, result: result)
-    @invalid_attributes = FactoryGirl.build(:user_game, user_id: @user_id, game_id: @game.to_param, result: "").attributes
+    @user_game = FactoryGirl.create(:user_game, user_id: @user_id, game_id: @game.to_param, result: result)
+    @invalid_attributes = FactoryGirl.build(:user_game, user_id: @user_id, game_id: @game.to_param, result: "aerg").attributes
   end
 
   describe "GET index" do
@@ -105,8 +105,7 @@ describe UserGamesController do
   describe "PUT update" do
     describe "with valid params" do
       before (:each) do
-        @user = FactoryGirl.create(:user)
-        @valid_attributes = FactoryGirl.build(:user_game, user_id: @user.to_param).attributes
+        @valid_attributes = FactoryGirl.build(:user_game, user_id: @user_id).attributes
       end
       it "updates the requested user_game" do
         # Assuming there are no other user_games in the database, this

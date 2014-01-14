@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "hints/index" do
-  before(:each) do
+  before do
     hint1 = FactoryGirl.create(:hint)
     hint2 = FactoryGirl.create(:hint, :hint_text => "game_hint_text")
-    assign(:games, [
+    assign(:hints, [
         hint1, hint2
     #stub_model Game, :id => game2.to_param
     ])
