@@ -8,7 +8,7 @@
     .controls
       = f.text_field :queue_number, :class => 'text_field'
   .controls
-    = f.hidden_field :game, value: @game
+    = f.hidden_field :task, value: @game
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), hints_path, :class => 'btn'

@@ -1,6 +1,6 @@
 class HintsController < ApplicationController
-  before_filter :check_game, only: [:new]
-  before_filter :check_game_create, only: [:create]
+  before_filter :check_task, only: [:new]
+  before_filter :check_task_create, only: [:create]
   before_filter :no_hints, except: [:new, :create]
   before_action :set_hint, only: [:show, :edit, :update, :destroy]
   skip_before_filter :authorize_admin, only: [:show]
@@ -30,10 +30,10 @@ class HintsController < ApplicationController
   # POST /hints.json
   def create
     @hint = Hint.new(hint_params)
-    game = params.require(:hint)[:game].to_i
+    task = params.require(:hint)[:task].to_i
     respond_to do |format|
       if @hint.save
-        if GameHint.create(game_id: game, hint_id: @hint.id)
+        if TaskHint.create(task_id: task, hint_id: @hint.id)
           format.html { redirect_to @hint, notice: 'Hint was successfully created.' }
           format.json { render action: 'show', status: :created, location: @hint }
         end
@@ -81,14 +81,14 @@ class HintsController < ApplicationController
 
   protected
 
-    def check_game
-      unless params.require(:game)
+    def check_task
+      unless params.require(:task)
           redirect_to games_path
       end
     end
 
-    def check_game_create
-      unless params.require(:hint)
+    def check_task_create
+      unless params.require(:hint)[:task]
         redirect_to games_path
       end
     end

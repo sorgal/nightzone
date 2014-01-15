@@ -30,7 +30,7 @@ describe CodesController do
   # CodesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
   before do
-    @game = FactoryGirl.create(:game)
+    @task = FactoryGirl.create(:task)
     @code = FactoryGirl.create(:code)
     @invalid_attributes = FactoryGirl.build(:code, code_string: "ывампывипа").attributes
   end
@@ -51,7 +51,7 @@ describe CodesController do
 
   describe "GET new" do
     it "assigns a new code as @code" do
-      get :new, {game: @game.to_param}, valid_session
+      get :new, {task: @task.to_param}, valid_session
       expect(assigns(:code)).to be_a_new(Code)
     end
   end
@@ -64,21 +64,27 @@ describe CodesController do
   end
 
   describe "POST create" do
+    before(:each) do
+      @code_post = @code.attributes
+      @code_post[:task] = @task.to_param
+      @code_post_invalid = @invalid_attributes
+      @code_post_invalid[:task] = @task.to_param
+    end
     describe "with valid params" do
       it "creates a new Code" do
         expect {
-          post :create, {:code => @code.attributes}, valid_session
+          post :create, {:code => @code_post}, valid_session
         }.to change(Code, :count).by(1)
       end
 
       it "assigns a newly created code as @code" do
-        post :create, {:code => @code.attributes}, valid_session
+        post :create, {:code => @code_post}, valid_session
         expect(assigns(:code)).to be_a(Code)
         expect(assigns(:code)).to be_persisted
       end
 
       it "redirects to the created code" do
-        post :create, {:code => @code.attributes}, valid_session
+        post :create, {:code => @code_post}, valid_session
         expect(response).to redirect_to(Code.last)
       end
     end
@@ -87,14 +93,14 @@ describe CodesController do
       it "assigns a newly created but unsaved code as @code" do
         # Trigger the behavior that occurs when invalid params are submitted
         Code.any_instance.stub(:save).and_return(false)
-        post :create, {:code => @invalid_attributes}, valid_session
+        post :create, {:code => @code_post_invalid}, valid_session
         expect(assigns(:code)).to be_a_new(Code)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Code.any_instance.stub(:save).and_return(false)
-        post :create, {:code => @invalid_attributes}, valid_session
+        post :create, {:code => @code_post_invalid}, valid_session
         expect(response).to render_template("new")
       end
     end

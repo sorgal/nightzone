@@ -1,7 +1,7 @@
 class CodesController < ApplicationController
   before_action :set_code, only: [:show, :edit, :update, :destroy]
-  before_filter :check_game, only: [:new]
-  before_filter :check_game_create, only: [:create]
+  before_filter :check_task, only: [:new]
+  before_filter :check_task_create, only: [:create]
   before_filter :no_codes, except: [:new, :create]
 
   # GET /codes
@@ -28,10 +28,10 @@ class CodesController < ApplicationController
   # POST /codes.json
   def create
     @code = Code.new(code_params)
-    game = params.require(:code)[:game].to_i
+    task = params.require(:code)[:task].to_i
     respond_to do |format|
       if @code.save
-        if GameCode.create(game_id: game, code_id: @code.id)
+        if TaskCode.create(task_id: task, code_id: @code.id)
           format.html { redirect_to @code, notice: 'Code was successfully created.' }
           format.json { render action: 'show', status: :created, location: @code }
         end
@@ -79,14 +79,14 @@ class CodesController < ApplicationController
 
   protected
 
-    def check_game
-      unless params.require(:game)
+    def check_task
+      unless params.require(:task)
         redirect_to games_path
       end
     end
 
-    def check_game_create
-      unless params.require(:code)
+    def check_task_create
+      unless params.require(:code)[:task]
         redirect_to games_path
       end
     end

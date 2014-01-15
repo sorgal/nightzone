@@ -1,11 +1,11 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game]
   skip_before_filter :authorize_admin, only: [:index, :show]
 
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.where(state: 0)
   end
 
   # GET /games/1
@@ -73,7 +73,20 @@ class GamesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-  def game_params
-    params.require(:game).permit(:title, :start_date, :duration)
-  end
+    def game_params
+      params.require(:game).permit(:title, :start_date, :duration)
+    end
+
+  public
+
+    def start_game
+      @game.update(state: 1)
+      @user_games = UserGame.where(game_id: @game.id)
+      @game_tasks = GameTask.where(game_id: @game.id).first
+      @user_games.each do |user_game|
+        @user_tasks.create(user_id: @user_game.id, task_id: @game_tasks.first.task_id, result: 0)
+      end
+      redirect_to games_path
+    end
+
 end

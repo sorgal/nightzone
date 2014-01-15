@@ -32,6 +32,10 @@ describe GamesController do
 
   before do
     @game = FactoryGirl.create(:game)
+    @task = FactoryGirl.create(:task)
+    @user = FactoryGirl.create(:user)
+    @game_task = FactoryGirl.create(:game_task)
+    @user_game = FactoryGirl.create(:user_game)
     @invalid_attributes = FactoryGirl.build(:game, title: "впирапеи", start_date: "01.01.2014 00:00:00".to_datetime, duration: 11).attributes
   end
 
@@ -152,6 +156,14 @@ describe GamesController do
     it "redirects to the games list" do
       delete :destroy, {:id => @game.to_param}, valid_session
       expect(response).to redirect_to(games_url)
+    end
+  end
+
+  describe "Start game" do
+    it "exuctes action " do
+      expect {
+        get "start_game", {id: @game.to_param}, valid_session
+      }.to change(UserTask, :count).by(1)
     end
   end
 

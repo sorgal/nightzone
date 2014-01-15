@@ -18,8 +18,6 @@ module ControllerMacros
     end
     after(:each) do
       User.find(@user_id).destroy
-
-
     end
   end
 end
