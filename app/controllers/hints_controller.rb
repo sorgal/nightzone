@@ -3,7 +3,7 @@ class HintsController < ApplicationController
   before_filter :check_task_create, only: [:create]
   before_filter :no_hints, except: [:new, :create]
   before_action :set_hint, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authorize_admin, only: [:show]
+  #skip_before_filter :authorize_admin, only: [:show]
 
   # GET /hints
   # GET /hints.json

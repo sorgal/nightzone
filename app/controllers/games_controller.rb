@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game, :check_game_status, :finish_game]
   skip_before_filter :authorize_admin, only: [:index, :show]
+  before_filter :authenticate_user!, only: [:show]
   before_filter :check_game_status, only: [:show]
   # GET /games
   # GET /games.json

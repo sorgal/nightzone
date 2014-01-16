@@ -17,6 +17,12 @@ table class="table table-striped"
         td= game.start_date
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
+
+          = link_to "New_task", new_task_path(game: game.id), :class => 'btn'
+
+          = link_to "Start game", {controller: "games", action: "start_game", id: game.id}, :class => 'btn'
+
+          = link_to "Finish_game", {controller: "games", action: "finish_game", id: game.id}, :class => 'btn'
           '
           = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(game), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 

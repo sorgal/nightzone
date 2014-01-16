@@ -69,6 +69,13 @@ describe CodeComparesController do
         expect(response).to redirect_to(game_path(id: @game.to_param))
       end
 
+      it "send valid pass with complete of user game" do
+        @user_data = FactoryGirl.build(:user).attributes
+        post :create, {:try_text => @user_data["password"], task: @task.to_param}, valid_session
+        puts 1
+        expect(UserGame.find(@user_game.to_param.to_i).state).to eq(-1)
+      end
+
     end
   end
 

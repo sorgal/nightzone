@@ -5,48 +5,33 @@ class CodeComparesController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    #Не совсем понял как получить пароль конкретного юзера из девиза
     @user_task = UserTask.where(user_id: current_user.id).last
-    @task_codes = TaskCode.where(task_id: @user_task.task_id)
-    notice = ""
     @task_game = GameTask.where(task_id: @user_task.task_id).first
-    @task_codes.each do |task_code|
-      @code = Code.where(id: task_code.code_id, code_string: params[:try_text])
-      if @code.count > 0
-         new_code_compare = {user_id: current_user.id, code_id: @code.first.id}
-        @code_compare = CodeCompare.new(new_code_compare)
-        #respond_to do |format|
+    notice = ""
+    unless pass_matching(params[:try_text])
+      @task_codes = TaskCode.where(task_id: @user_task.task_id)
+      @task_codes.each do |task_code|
+        @code = Code.where(id: task_code.code_id, code_string: params[:try_text])
+        if @code.count > 0
+          new_code_compare = {user_id: current_user.id, code_id: @code.first.id}
+          @code_compare = CodeCompare.new(new_code_compare)
           if @code_compare.save
-            notice = "Code was matched"
+            notice += "Code was matched"
             if (CodeCompare.where(user_id: current_user.id, code_id: task_code.code_id).count ==
                 @task_codes.count)
-                @user_hints = UserHint.where(user_id: current_user.id).count
-                @task = Task.find(task_code.task_id)
-                points_received = @task.points - @user_hints
-                @user_task.update(result: points_received)
-                @new_game_task = GameTask.where("`game_id` = ? AND `task_id` <> ?", @task_game.game_id, task_code.task_id)
-                if @new_game_task.count > 0
-                  UserTask.create(user_id: current_user.id, task_id: @new_game_task.first.task_id)
-                  notice = "Code was matched. New Task was started"
-                else
-                  @user_tasks = UserTask.where(user_id: current_user.id)
-                  points = 0
-                  @user_tasks.each do |user_task|
-                    points += user_task.result
-                  end
-                  @user_game = UserGame.where(user_id: current_user.id, game_id: @task_game.game_id).first
-                  @user_game.update(result: points, state: -1)
-                  notice = "Code was matched. Game was ended"
-                end
+                notice += ". " + change_user_task_and_user_game(task_code.task_id, -1, @task_game.game_id)
             end
           end
-        #end
-        break
+          break
+        end
       end
+    else
+      notice += "Pass was matched"
+      notice += ". " + change_user_task_and_user_game(@user_task.task_id, 0, @task_game.game_id)
     end
 
     if notice == ""
-      notice = "Code was not matched"
+      notice += "Code or pass was not matched"
     end
 
     respond_to do |format|
@@ -74,12 +59,51 @@ class CodeComparesController < ApplicationController
     params.require(:code_compare).permit(:user_id, :code_id)
   end
 
+
   protected
     def check_code_compare_creation
       unless params[:try_text] && params[:task]
         @game_task = GameTask.where(task_id: params[:task].to_i).first
         redirect_to game_path(id: @game_task.game_id)
       end
+    end
+
+    def pass_matching(text)
+      if User.find(current_user.id).valid_password?(text)
+        return true
+      else
+        return false
+      end
+    end
+
+    def change_user_task_and_user_game(task_id, points, game_id)
+      notice = ""
+      @user_task = UserTask.where(user_id: current_user.id, task_id: task_id).last
+      @user_hints = UserHint.where(user_id: current_user.id).count
+      @task = Task.find(task_id)
+      received_points = 0
+      if (points < 0)
+        received_points = @task.points - @user_hints
+      else
+        received_points = points
+      end
+      @user_task.update(result: received_points)
+      puts 1
+      @new_game_task = GameTask.where("`game_id` = ? AND `task_id` <> ?", game_id, task_id)
+      if @new_game_task.count > 0
+        UserTask.create(user_id: current_user.id, task_id: @new_game_task.first.task_id)
+        notice += "New Task was started"
+      else
+        @user_tasks = UserTask.where(user_id: current_user.id)
+        points = 0
+        @user_tasks.each do |user_task|
+          points += user_task.result
+        end
+        @user_game = UserGame.where(user_id: current_user.id, game_id: game_id).first
+        @user_game.update(result: points, state: -1)
+        notice += "Game was ended"
+      end
+      return notice
     end
 
 end
