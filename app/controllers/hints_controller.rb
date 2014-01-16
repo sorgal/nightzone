@@ -18,8 +18,12 @@ class HintsController < ApplicationController
 
   # GET /hints/new
   def new
+    task = params[:task].to_i
+    @cant_add = false
+    if TaskHint.where(task_id: task).count == 2
+      @cant_add = true
+    end
     @hint = Hint.new
-    @game = params[:game]
   end
 
   # GET /hints/1/edit
@@ -29,8 +33,8 @@ class HintsController < ApplicationController
   # POST /hints
   # POST /hints.json
   def create
-    @hint = Hint.new(hint_params)
     task = params.require(:hint)[:task].to_i
+    @hint = Hint.new(hint_params)
     respond_to do |format|
       if @hint.save
         if TaskHint.create(task_id: task, hint_id: @hint.id)
@@ -90,6 +94,14 @@ class HintsController < ApplicationController
     def check_task_create
       unless params.require(:hint)[:task]
         redirect_to games_path
+      end
+      task = params.require(:hint)[:task].to_i
+      @task_hints = TaskHint.where(task_id: task)
+      if @task_hints.count > 0
+        @hint = Hint.find(@task_hints.first.hint_id)
+        if @hint.queue_number == params.require(:hint)[:queue_number].to_i
+          redirect_to new_hint_path, notice: "Parameter queue_number must be equal to " +  (3 - params.require(:hint)[:queue_number].to_i).to_s
+        end
       end
     end
 

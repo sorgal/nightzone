@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :code_compares, dependent: :destroy
   has_many :code_compares, dependent: :destroy
   has_many :user_tasks, dependent: :destroy
+  has_many :user_hints, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 end

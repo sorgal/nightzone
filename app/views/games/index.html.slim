@@ -7,7 +7,6 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:title)
       th= model_class.human_attribute_name(:start_date)
-      th= model_class.human_attribute_name(:duration)
       th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
@@ -16,8 +15,6 @@ table class="table table-striped"
         td= link_to game.id, game_path(game)
         td= game.title
         td= game.start_date
-        td= game.duration
-        td=l game.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
           '

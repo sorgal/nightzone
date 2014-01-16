@@ -33,6 +33,12 @@ describe TasksController do
   before do
     @game = FactoryGirl.create(:game)
     @task = FactoryGirl.create(:task)
+    @hint = FactoryGirl.create(:hint)
+    @user = FactoryGirl.create(:user)
+    @user_task = FactoryGirl.create(:user_task, user_id: @user.to_param, task_id: @task.to_param)
+    @task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @hint.to_param)
+    @hint2 = FactoryGirl.create(:hint, hint_text: " wvgrawrfswf", queue_number: 2)
+    @task_hint2 = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @hint2.to_param)
     #puts Task.first.to_yaml
     @invalid_attributes = FactoryGirl.build(:task, task_text: "впирапеи").attributes
   end
@@ -161,6 +167,23 @@ describe TasksController do
       delete :destroy, {:id => @task.to_param}, valid_session
       expect(response).to redirect_to(tasks_url)
     end
+  end
+
+  describe "Raise hint" do
+    it "execute action " do
+      expect {
+        get "raise_hint", {id: @task.to_param}, valid_session
+      }.to change(UserHint, :count).by(1)
+    end
+
+    it "insert second hint" do
+      @user_hint = FactoryGirl.create(:user_hint, user_id: @user.to_param, hint_id: @hint.to_param)
+      expect {
+        get "raise_hint", {id: @task.to_param}, valid_session
+      }.to change(UserHint, :count).by(1)
+      expect(UserHint.last.hint_id).to eq(@hint2.to_param.to_i)
+    end
+
   end
 
 end

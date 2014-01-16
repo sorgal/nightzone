@@ -70,18 +70,18 @@ describe UserGamesController do
     describe "with valid params" do
       it "creates a new UserGame" do
         expect {
-          post :create, {:user_game => @user_game.attributes}, valid_session
+          post :create, {game_id: @user_game.attributes["game_id"]}, valid_session
         }.to change(UserGame, :count).by(1)
       end
 
       it "assigns a newly created user_game as @user_game" do
-        post :create, {:user_game => @user_game.attributes}, valid_session
+        post :create, {game_id: @user_game.attributes["game_id"]}, valid_session
         expect(assigns(:user_game)).to be_a(UserGame)
         expect(assigns(:user_game)).to be_persisted
       end
 
       it "redirects to the created users games list" do
-        post :create, {:user_game => @user_game.attributes}, valid_session
+        post :create, {game_id: @user_game.attributes["game_id"]}, valid_session
         expect(response).to redirect_to(user_games_url)
       end
     end
@@ -90,14 +90,14 @@ describe UserGamesController do
       it "assigns a newly created but unsaved user_game as @user_game" do
         # Trigger the behavior that occurs when invalid params are submitted
         UserGame.any_instance.stub(:save).and_return(false)
-        post :create, {:user_game => @invalid_attributes}, valid_session
+        post :create, {game_id: "123"}, valid_session
         expect(assigns(:user_game)).to be_a_new(UserGame)
       end
 
       it "redirect the root template" do
         # Trigger the behavior that occurs when invalid params are submitted
         UserGame.any_instance.stub(:save).and_return(false)
-        post :create, {:user_game => @invalid_attributes}, valid_session
+        post :create, {game_id: "123"}, valid_session
         expect(response).to redirect_to(root_path)
       end
     end

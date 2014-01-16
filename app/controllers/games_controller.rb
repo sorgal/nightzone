@@ -1,16 +1,27 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game, :check_game_status, :finish_game]
   skip_before_filter :authorize_admin, only: [:index, :show]
-
+  before_filter :check_game_status, only: [:show]
   # GET /games
   # GET /games.json
   def index
-    @games = Game.where(state: 0)
+    @games = Game.all
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+    @status = ""
+    if @game.state == 0
+      @status = "Wait"
+    elsif @game.state > 0
+      @status = "Started"
+      @user_task = UserTask.where(user_id: current_user.id, game_id: @game.id).last
+      @task = Task.find(@user_task.task_id).first
+      @task_codes_count = TaskCode.where(task_id: @user_task.task_id).count
+    elsif @game.state < 0
+      @status = "Finished"
+    end
   end
 
   # GET /games/new
@@ -74,19 +85,41 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:title, :start_date, :duration)
+      params.require(:game).permit(:title, :start_date)
     end
 
   public
-
+    #Заглушки для отложенных задач
     def start_game
       @game.update(state: 1)
       @user_games = UserGame.where(game_id: @game.id)
       @game_tasks = GameTask.where(game_id: @game.id).first
       @user_games.each do |user_game|
-        @user_tasks.create(user_id: @user_game.id, task_id: @game_tasks.first.task_id, result: 0)
+        UserTask.create(user_id: user_game.id, task_id: @game_tasks.task_id, result: 0)
+        user_game.update(state: 1)
       end
       redirect_to games_path
     end
+
+    def finish_game
+      @game.update(state: -1)
+      @user_games = UserGame.where(game_id: @game.id)
+      @user_games.each do |user_game|
+        points = 0
+        UserTask.where(user_id: user_game.user_id).each do |user_task|
+          points += user_task.result
+        end
+        user_game.update(state: -1, result: points)
+      end
+      redirect_to games_path
+    end
+
+  protected
+
+  def check_game_status
+    if user_signed_in? && @game.status <= 0
+      redirect_to root_path
+    end
+  end
 
 end

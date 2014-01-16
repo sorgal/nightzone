@@ -34,7 +34,9 @@ describe HintsController do
     queue_number = rand(1...2)
     @task = FactoryGirl.create(:task)
     @hint = FactoryGirl.create(:hint, queue_number: queue_number)
-    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "акпыук").attributes
+    @new_hint = FactoryGirl.build(:hint, queue_number: 3 - queue_number)
+    @task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @hint.to_param)
+    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "акпыук", queue_number: 3 - queue_number).attributes
   end
 
   describe "GET index" do
@@ -49,6 +51,7 @@ describe HintsController do
       get :show, {:id => @hint.to_param}, valid_session
       expect(assigns(:hint)).to eq(@hint)
     end
+
   end
 
   describe "GET new" do
@@ -56,6 +59,14 @@ describe HintsController do
       get :new, {task: @task.to_param}, valid_session
       expect(assigns(:hint)).to be_a_new(Hint)
     end
+
+    it "check task hints count" do
+      @new_hint = FactoryGirl.create(:hint, hint_text: "gfbdfsbgsdfgbdfg")
+      @new_task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @new_hint.to_param)
+      get :show, {:id => @hint.to_param}, valid_session
+      expect(assigns(:hint)).to eq(@hint)
+    end
+
   end
 
   describe "GET edit" do
@@ -67,7 +78,7 @@ describe HintsController do
 
   describe "POST create" do
     before(:each) do
-      @hint_post = @hint.attributes
+      @hint_post = @new_hint.attributes
       @hint_post[:task] = @task.to_param
       @hint_post_invalid = @invalid_attributes
       @hint_post_invalid[:task] = @task.to_param

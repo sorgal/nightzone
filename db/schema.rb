@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115100758) do
+ActiveRecord::Schema.define(version: 20140115190550) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 20140115100758) do
   create_table "games", force: true do |t|
     t.string   "title"
     t.datetime "start_date"
-    t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "state",      default: 0
@@ -116,12 +115,20 @@ ActiveRecord::Schema.define(version: 20140115100758) do
     t.integer  "result",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "state",      default: 0
+  end
+
+  create_table "user_hints", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "hint_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_tasks", force: true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
-    t.integer  "result",     default: 0
+    t.integer  "result",     default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

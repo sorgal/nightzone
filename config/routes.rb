@@ -1,5 +1,10 @@
 Nightzone::Application.routes.draw do
 
+  controller :user_hints do
+    post 'user_hints/', :to => 'user_hints#create'
+    delete 'user_hints/:id', :to => 'user_hints#destroy'
+  end
+
   controller :game_tasks do
     post 'game_tasks/', :to => 'game_tasks#create'
     delete 'game_tasks/:id', :to => 'game_tasks#destroy'
@@ -54,7 +59,13 @@ Nightzone::Application.routes.draw do
   get "home/index"
   controller :games do
       get "start_game/:id" => "games#start_game"
+      get "finish_game/:id" => "games#finish_game"
   end
+
+  controller :tasks do
+    get "raise_hint/:id" => "tasks#raise_hint"
+  end
+
   #get "home/game_tasks_compares"
   #post "home/create_code_compare"
   devise_for :admin_users, ActiveAdmin::Devise.config
