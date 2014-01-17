@@ -5,37 +5,14 @@ class CodeComparesController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    @user_task = UserTask.where(user_id: current_user.id).last
-    @task_game = GameTask.where(task_id: @user_task.task_id).first
-    notice = ""
-    unless pass_matching(params[:try_text])
-      @task_codes = TaskCode.where(task_id: @user_task.task_id)
-      @task_codes.each do |task_code|
-        @code = Code.where(id: task_code.code_id, code_string: params[:try_text])
-        if @code.count > 0
-          new_code_compare = {user_id: current_user.id, code_id: @code.first.id}
-          @code_compare = CodeCompare.new(new_code_compare)
-          if @code_compare.save
-            notice += "Code was matched"
-            if (CodeCompare.where(user_id: current_user.id, code_id: task_code.code_id).count ==
-                @task_codes.count)
-                notice += ". " + change_user_task_and_user_game(task_code.task_id, -1, @task_game.game_id)
-            end
-          end
-          break
-        end
-      end
-    else
-      notice += "Pass was matched"
-      notice += ". " + change_user_task_and_user_game(@user_task.task_id, 0, @task_game.game_id)
-    end
+    @task = current_user.tasks.last
+    @game = @task.game
 
-    if notice == ""
-      notice += "Code or pass was not matched"
-    end
+    notice = ""
+    notice = @game.process(current_user, @task, params[:try_text])
 
     respond_to do |format|
-      format.html { redirect_to game_path(id: @task_game.game_id), notice: notice }
+      format.html { redirect_to game_path(id: @game.id), notice: notice }
       format.json { head :no_content }
     end
   end
@@ -61,49 +38,48 @@ class CodeComparesController < ApplicationController
 
 
   protected
-    def check_code_compare_creation
-      unless params[:try_text] && params[:task]
-        @game_task = GameTask.where(task_id: params[:task].to_i).first
-        redirect_to game_path(id: @game_task.game_id)
-      end
-    end
 
-    def pass_matching(text)
-      if User.find(current_user.id).valid_password?(text)
-        return true
-      else
-        return false
-      end
+  def check_code_compare_creation
+    unless params[:try_text] && params[:task]
+      @game = @task.game
+      redirect_to game_path(id: @game.game)
     end
+  end
 
-    def change_user_task_and_user_game(task_id, points, game_id)
-      notice = ""
-      @user_task = UserTask.where(user_id: current_user.id, task_id: task_id).last
-      @user_hints = UserHint.where(user_id: current_user.id).count
-      @task = Task.find(task_id)
-      received_points = 0
-      if (points < 0)
-        received_points = @task.points - @user_hints
-      else
-        received_points = points
-      end
-      @user_task.update(result: received_points)
-      puts 1
-      @new_game_task = GameTask.where("`game_id` = ? AND `task_id` <> ?", game_id, task_id)
-      if @new_game_task.count > 0
-        UserTask.create(user_id: current_user.id, task_id: @new_game_task.first.task_id)
-        notice += "New Task was started"
-      else
-        @user_tasks = UserTask.where(user_id: current_user.id)
-        points = 0
-        @user_tasks.each do |user_task|
-          points += user_task.result
-        end
-        @user_game = UserGame.where(user_id: current_user.id, game_id: game_id).first
-        @user_game.update(result: points, state: -1)
-        notice += "Game was ended"
-      end
-      return notice
+  def pass_matching(text)
+    if User.find(current_user.id).valid_password?(text)
+      return true
+    else
+      return false
     end
+  end
+
+  def next_task(points)
+    if has_more_tasks?
+      assign_next_task(points)
+      "Next task assigned"
+    else
+      end_game
+      "Game completed"
+    end
+  end
+
+  def has_more_tasks?
+    untaken_tasks.any?
+  end
+
+  def assign_next_task(points)
+    current_user.user_tasks.last.update_attribute(:result, points)
+    current_user.user_tasks.create(task: untaken_tasks.first)
+  end
+
+  def end_game
+    current_user.user_games.current.first.update_attribute(:state, UserGame::COMPLETED)
+  end
+
+  def untaken_tasks
+    completed_ids = @game.tasks.for_user(current_user.id).pluck(:id)
+    @untaken_tasks ||= @game.tasks.where('`tasks`.`id` NOT IN (?)', completed_ids.join(',') )
+  end
 
 end

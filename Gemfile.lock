@@ -288,7 +288,7 @@ DEPENDENCIES
   devise
   email_spec
   factory_girl_rails (~> 4.0)
-  faye-rails
+  faye-rails (~> 1.0.6)
   jbuilder (~> 1.2)
   jquery-rails
   mysql2

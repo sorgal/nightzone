@@ -37,7 +37,7 @@ describe CodeComparesController do
     @user_task = FactoryGirl.create(:user_task, user_id: @user_id, task_id: @task.to_param)
     @task_code = FactoryGirl.create(:task_code, task_id: @task.to_param, code_id: @code.to_param)
     @task_game = FactoryGirl.create(:game_task, game_id: @game.to_param, task_id: @task.to_param)
-    @user_game = FactoryGirl.create(:user_game, user_id: @user_id, game_id: @game.to_param)
+    @user_game = FactoryGirl.create(:user_game, user_id: @user_id, game_id: @game.to_param, state: 1)
   end
 
   describe "POST create" do
@@ -66,14 +66,24 @@ describe CodeComparesController do
 
       it "creates a new CodeCompare with code mismatched result" do
         post :create, {:try_text => @code.attributes["code_string"] + "sefbgdfgbnfg", task: @task.to_param}, valid_session
-        expect(response).to redirect_to(game_path(id: @game.to_param))
+        expect(response).to redirect_to(game_path(@game))
       end
 
       it "send valid pass with complete of user game" do
         @user_data = FactoryGirl.build(:user).attributes
-        post :create, {:try_text => @user_data["password"], task: @task.to_param}, valid_session
-        puts 1
+        post :create, {:try_text => "1234567890", task: @task.to_param}, valid_session
         expect(UserGame.find(@user_game.to_param.to_i).state).to eq(-1)
+      end
+
+      it "creates a new CodeCompare and change task" do
+        @new_task = FactoryGirl.create(:task, task_text: "sdgbhdrhndrbhzsgfr")
+        @new_code = FactoryGirl.create(:code, code_string: "dfbdfbndfgnhdfgdfh")
+        @new_user_task = FactoryGirl.build(:user_task, user_id: @user_id, task_id: @new_task.to_param)
+        @new_task_code = FactoryGirl.create(:task_code, task_id: @new_task.to_param, code_id: @new_code.to_param)
+        @new_task_game = FactoryGirl.create(:game_task, game_id: @game.to_param, task_id: @new_task.to_param)
+        post :create, {:try_text => "1234567890", task: @task.to_param}, valid_session
+        #puts UserTask.count
+        expect(UserTask.last.task_id).to eq(@new_task.to_param.to_i)
       end
 
     end
