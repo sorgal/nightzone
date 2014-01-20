@@ -1,5 +1,5 @@
 class AddStateToGames < ActiveRecord::Migration
   def change
-    add_column :games, :state, :integer, default: -1
+    add_column :games, :state, :integer, default: 0
   end
 end

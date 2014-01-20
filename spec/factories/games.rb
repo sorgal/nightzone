@@ -4,6 +4,5 @@ FactoryGirl.define do
   factory :game do
     title "new_game"
     start_date "01.01.2014 00:00:00".to_datetime
-    duration 30
   end
 end

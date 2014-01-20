@@ -13,9 +13,13 @@ table class="table table-striped"
   tbody
     - @games.each do |game|
       tr
-        td= game.title
+        -if game.state >0
+          td
+            = link_to game.title, game_path({id: game.id}), :method => :get, :class => 'btn btn-mini'
+        -else
+          td= game.title
         td= game.start_date
-        td= game.duration
-        td=l game.created_at
         //td
           = link_to t('.destroy', :default => t("helpers.links.destroy")), user_game_path({id: game[:user_game]}), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+

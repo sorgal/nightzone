@@ -32,9 +32,11 @@ describe HintsController do
 
   before do
     queue_number = rand(1...2)
-    @game = FactoryGirl.create(:game)
+    @task = FactoryGirl.create(:task)
     @hint = FactoryGirl.create(:hint, queue_number: queue_number)
-    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "акпыук").attributes
+    @new_hint = FactoryGirl.build(:hint, queue_number: 3 - queue_number)
+    @task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @hint.to_param)
+    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "акпыук", queue_number: 3 - queue_number).attributes
   end
 
   describe "GET index" do
@@ -49,13 +51,22 @@ describe HintsController do
       get :show, {:id => @hint.to_param}, valid_session
       expect(assigns(:hint)).to eq(@hint)
     end
+
   end
 
   describe "GET new" do
     it "assigns a new hint as @hint" do
-      get :new, {game: @game.to_param}, valid_session
+      get :new, {task: @task.to_param}, valid_session
       expect(assigns(:hint)).to be_a_new(Hint)
     end
+
+    it "check task hints count" do
+      @new_hint = FactoryGirl.create(:hint, hint_text: "gfbdfsbgsdfgbdfg")
+      @new_task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @new_hint.to_param)
+      get :show, {:id => @hint.to_param}, valid_session
+      expect(assigns(:hint)).to eq(@hint)
+    end
+
   end
 
   describe "GET edit" do
@@ -66,21 +77,27 @@ describe HintsController do
   end
 
   describe "POST create" do
+    before(:each) do
+      @hint_post = @new_hint.attributes
+      @hint_post[:task] = @task.to_param
+      @hint_post_invalid = @invalid_attributes
+      @hint_post_invalid[:task] = @task.to_param
+    end
     describe "with valid params" do
       it "creates a new Hint" do
         expect {
-          post :create, {:hint => @hint.attributes}, valid_session
+          post :create, {:hint => @hint_post}, valid_session
         }.to change(Hint, :count).by(1)
       end
 
       it "assigns a newly created hint as @hint" do
-        post :create, {:hint => @hint.attributes}, valid_session
+        post :create, {:hint => @hint_post}, valid_session
         expect(assigns(:hint)).to be_a(Hint)
         expect(assigns(:hint)).to be_persisted
       end
 
       it "redirects to the created hint" do
-        post :create, {:hint => @hint.attributes}, valid_session
+        post :create, {:hint => @hint_post}, valid_session
         expect(response).to redirect_to(Hint.last)
       end
     end
@@ -89,14 +106,14 @@ describe HintsController do
       it "assigns a newly created but unsaved hint as @hint" do
         # Trigger the behavior that occurs when invalid params are submitted
         Hint.any_instance.stub(:save).and_return(false)
-        post :create, {:hint => @invalid_attributes}, valid_session
+        post :create, {:hint => @hint_post_invalid}, valid_session
         expect(assigns(:hint)).to be_a_new(Hint)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Hint.any_instance.stub(:save).and_return(false)
-        post :create, {:hint => @invalid_attributes}, valid_session
+        post :create, {:hint => @hint_post_invalid}, valid_session
         expect(response).to render_template("new")
       end
     end

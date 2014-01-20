@@ -3,10 +3,12 @@ class UserGamesController < ApplicationController
   skip_before_filter :authorize_admin
   before_filter :authenticate_user!
   before_filter :check_game_create, only: [:create]
+  before_filter :user_games_count, except: [:create]
   # GET /user_games
   # GET /user_games.json
   def index
-    @user_games = UserGame.where(user_id: current_user.id)
+    #@user_games = UserGame.where(""user_id: current_user.id, "`state` >= 0""")
+    @user_games = UserGame.where("`user_id` = ? AND `state` >= ?", current_user.id, 0)
     @games = []
     @user_games.each do |user_game|
       @games << Game.find(user_game.game_id)
@@ -30,15 +32,14 @@ class UserGamesController < ApplicationController
   # POST /user_games
   # POST /user_games.json
   def create
-    new_user_game = user_game_params
+    new_user_game = {}
+    new_user_game[:game_id] = params[:game_id].to_i
     new_user_game[:user_id] = current_user.id
     @user_game = UserGame.new(new_user_game)
 
-    #@user_game = UserGame.new({game_id: params[:game].to_i, user_id: current_user.id})
-
     respond_to do |format|
       if @user_game.save
-        format.html { redirect_to user_games_url, notice: 'User game was successfully created.' }
+        format.html { redirect_to user_games_url, notice: 'User game was join in game with success.' }
         format.json { render action: 'index', status: :created, location: @user_game }
       else
         format.html { redirect_to root_path }
@@ -74,21 +75,28 @@ class UserGamesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_game
-      @user_game = UserGame.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_game
+    @user_game = UserGame.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_game_params
-      params.require(:user_game).permit(:user_id, :game_id, :result)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_game_params
+    params.require(:user_game).permit(:user_id, :game_id, :result)
+  end
 
   protected
 
     def check_game_create
-      unless params.require(:user_game)
+      unless params.require(:game_id)
         redirect_to root_path
       end
     end
+
+    def user_games_count
+      unless UserGame.count > 0
+        redirect_to root_path
+      end
+    end
+
 end

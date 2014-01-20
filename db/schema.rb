@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114124729) do
+ActiveRecord::Schema.define(version: 20140117062532) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -66,16 +66,9 @@ ActiveRecord::Schema.define(version: 20140114124729) do
     t.datetime "updated_at"
   end
 
-  create_table "game_codes", force: true do |t|
+  create_table "game_tasks", force: true do |t|
     t.integer  "game_id"
-    t.integer  "code_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "game_hints", force: true do |t|
-    t.integer  "game_id"
-    t.integer  "hint_id"
+    t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,10 +76,9 @@ ActiveRecord::Schema.define(version: 20140114124729) do
   create_table "games", force: true do |t|
     t.string   "title"
     t.datetime "start_date"
-    t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "state",      default: -1
+    t.integer  "state",      default: 0
   end
 
   create_table "hints", force: true do |t|
@@ -96,12 +88,54 @@ ActiveRecord::Schema.define(version: 20140114124729) do
     t.integer  "queue_number"
   end
 
+  create_table "messages", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "task_codes", force: true do |t|
+    t.integer  "task_id"
+    t.integer  "code_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "task_hints", force: true do |t|
+    t.integer  "task_id"
+    t.integer  "hint_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.text     "task_text"
+    t.integer  "points"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_games", force: true do |t|
     t.integer  "user_id"
     t.integer  "game_id"
+    t.integer  "result",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "result",     default: 0
+    t.integer  "state",      default: 0
+  end
+
+  create_table "user_hints", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "hint_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_tasks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.integer  "result",     default: -1
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

@@ -32,10 +32,15 @@ describe GamesController do
 
   before do
     @game = FactoryGirl.create(:game)
-    @invalid_attributes = FactoryGirl.build(:game, title: "впирапеи", start_date: "01.01.2014 00:00:00".to_datetime, duration: 11).attributes
+    @task = FactoryGirl.create(:task)
+    #@user = FactoryGirl.create(:user)
+    @game_task = FactoryGirl.create(:game_task, game_id: @game.to_param, task_id: @task.to_param)
+    @user_game = FactoryGirl.create(:user_game, user_id: @user_id, game_id: @game.to_param)
+    @invalid_attributes = FactoryGirl.build(:game, title: "впирапеи", start_date: "01.01.2014 00:00:00".to_datetime).attributes
   end
 
   describe "GET index" do
+    login_user
     it "assigns all games as @games" do
       get :index, {}, valid_session
       expect(assigns(:games)).to eq([@game])
@@ -50,6 +55,7 @@ describe GamesController do
   end
 
   describe "GET new" do
+    login_user
     it "assigns a new game as @game" do
       get :new, {}, valid_session
       expect(assigns(:game)).to be_a_new(Game)
@@ -152,6 +158,22 @@ describe GamesController do
     it "redirects to the games list" do
       delete :destroy, {:id => @game.to_param}, valid_session
       expect(response).to redirect_to(games_url)
+    end
+  end
+
+  describe "Start game" do
+    it "execute action " do
+      expect {
+        get "start_game", {id: @game.to_param}, valid_session
+      }.to change(UserTask, :count).by(1)
+    end
+  end
+
+  describe "Finish game" do
+    it "execute action " do
+      get "finish_game", {id: @game.to_param}, valid_session
+      expect(Game.find(@game.to_param.to_i).state).to eq(-1)
+      expect(UserGame.find(@user_game.to_param.to_i).state).to eq(-1)
     end
   end
 

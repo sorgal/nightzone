@@ -68,3 +68,4 @@ gem 'selenium-webdriver'
 gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'poltergeist'
+gem 'faye-rails', '~> 1.0.6'

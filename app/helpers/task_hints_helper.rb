@@ -1,0 +1,2 @@
+module TaskHintsHelper
+end

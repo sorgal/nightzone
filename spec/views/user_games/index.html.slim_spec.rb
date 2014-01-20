@@ -5,7 +5,7 @@ describe "user_games/index" do
     game1 = FactoryGirl.create(:game)
     game2 = FactoryGirl.create(:game, title: "dsgsdfgsdfgv")
     assign(:games, [
-      game1, game2
+        game1, game2
     ])
   end
 

@@ -1,9 +1,9 @@
 class HintsController < ApplicationController
-  before_filter :check_game, only: [:new]
-  before_filter :check_game_create, only: [:create]
+  before_filter :check_task, only: [:new]
+  before_filter :check_task_create, only: [:create]
   before_filter :no_hints, except: [:new, :create]
   before_action :set_hint, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authorize_admin, only: [:show]
+  #skip_before_filter :authorize_admin, only: [:show]
 
   # GET /hints
   # GET /hints.json
@@ -18,8 +18,12 @@ class HintsController < ApplicationController
 
   # GET /hints/new
   def new
+    task = params[:task].to_i
+    @cant_add = false
+    if TaskHint.where(task_id: task).count == 2
+      @cant_add = true
+    end
     @hint = Hint.new
-    @game = params[:game]
   end
 
   # GET /hints/1/edit
@@ -29,11 +33,11 @@ class HintsController < ApplicationController
   # POST /hints
   # POST /hints.json
   def create
+    task = params.require(:hint)[:task].to_i
     @hint = Hint.new(hint_params)
-    game = params.require(:hint)[:game].to_i
     respond_to do |format|
       if @hint.save
-        if GameHint.create(game_id: game, hint_id: @hint.id)
+        if TaskHint.create(task_id: task, hint_id: @hint.id)
           format.html { redirect_to @hint, notice: 'Hint was successfully created.' }
           format.json { render action: 'show', status: :created, location: @hint }
         end
@@ -81,15 +85,23 @@ class HintsController < ApplicationController
 
   protected
 
-    def check_game
-      unless params.require(:game)
+    def check_task
+      unless params.require(:task)
           redirect_to games_path
       end
     end
 
-    def check_game_create
-      unless params.require(:hint)
+    def check_task_create
+      unless params.require(:hint)[:task]
         redirect_to games_path
+      end
+      task = params.require(:hint)[:task].to_i
+      @task_hints = TaskHint.where(task_id: task)
+      if @task_hints.count > 0
+        @hint = Hint.find(@task_hints.first.hint_id)
+        if @hint.queue_number == params.require(:hint)[:queue_number].to_i
+          redirect_to new_hint_path, notice: "Parameter queue_number must be equal to " +  (3 - params.require(:hint)[:queue_number].to_i).to_s
+        end
       end
     end
 
