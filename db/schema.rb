@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117062532) do
+ActiveRecord::Schema.define(version: 20140120140458) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140117062532) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_games", force: true do |t|
-    t.integer  "admin_id"
+    t.integer  "admin_user_id"
     t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140117062532) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "queue_number"
+    t.integer  "raised",       default: 0
   end
 
   create_table "messages", force: true do |t|

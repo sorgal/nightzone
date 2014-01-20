@@ -11,4 +11,13 @@ class Task < ActiveRecord::Base
 
   scope :for_user, -> id {joins(:user_tasks).where(user_tasks: {user_id: id})}
 
+  def raise_hint
+    @hint = self.hints.where(raised: Hint::NOT).first
+    if @hint
+      self.user_tasks.each do |user_task|
+        UserHint.create(user_id: user_task.user_id, hint_id: @hint.id)
+      end
+    end
+  end
+
 end

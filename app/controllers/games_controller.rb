@@ -92,26 +92,12 @@ class GamesController < ApplicationController
   public
     #Заглушки для отложенных задач
     def start_game
-      @game.update(state: 1)
-      @user_games = UserGame.where(game_id: @game.id)
-      @game_tasks = GameTask.where(game_id: @game.id).first
-      @user_games.each do |user_game|
-        UserTask.create(user_id: user_game.id, task_id: @game_tasks.task_id, result: 0)
-        user_game.update(state: 1)
-      end
+      @game.start_game
       redirect_to games_path
     end
 
     def finish_game
-      @game.update(state: -1)
-      @user_games = UserGame.where(game_id: @game.id)
-      @user_games.each do |user_game|
-        points = 0
-        UserTask.where(user_id: user_game.user_id).each do |user_task|
-          points += user_task.result
-        end
-        user_game.update(state: -1, result: points)
-      end
+      @game.finish_game
       redirect_to games_path
     end
 

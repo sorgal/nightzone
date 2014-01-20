@@ -176,14 +176,37 @@ describe TasksController do
       }.to change(UserHint, :count).by(1)
     end
 
-    it "insert second hint" do
-      @user_hint = FactoryGirl.create(:user_hint, user_id: @user.to_param, hint_id: @hint.to_param)
+    it "raises first hint" do
       expect {
         get "raise_hint", {id: @task.to_param}, valid_session
       }.to change(UserHint, :count).by(1)
-      expect(UserHint.last.hint_id).to eq(@hint2.to_param.to_i)
+      expect(UserHint.last.hint_id).to eq(@hint.to_param.to_i)
+      expect(UserHint.count).to eq(1)
     end
 
+    describe "hints count > 1" do
+      before(:each) do
+        Hint.find(@hint.to_param.to_i).update_attribute(:raised, Hint::RAISED)
+        @user_hint = FactoryGirl.create(:user_hint, user_id: @user.to_param, hint_id: @hint.to_param)
+      end
+      it "raises second hint" do
+        expect {
+          get "raise_hint", {id: @task.to_param}, valid_session
+        }.to change(UserHint, :count).by(1)
+        expect(UserHint.last.hint_id).to eq(@hint2.to_param.to_i)
+        expect(UserHint.count).to eq(2)
+      end
+
+      it "doesn't raise third hint" do
+        Hint.find(@hint2.to_param.to_i).update_attribute(:raised, Hint::RAISED)
+        @user_hint2 = FactoryGirl.create(:user_hint, user_id: @user.to_param, hint_id: @hint2.to_param)
+        expect {
+          get "raise_hint", {id: @task.to_param}, valid_session
+        }.to change(UserHint, :count).by(0)
+        expect(UserHint.last.hint_id).to eq(@hint2.to_param.to_i)
+        expect(UserHint.count).to eq(2)
+      end
+    end
   end
 
 end

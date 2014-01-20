@@ -31,12 +31,12 @@ describe HintsController do
   let(:valid_session) { {} }
 
   before do
-    queue_number = rand(1...2)
+    @queue_number = rand(1...2)
     @task = FactoryGirl.create(:task)
-    @hint = FactoryGirl.create(:hint, queue_number: queue_number)
-    @new_hint = FactoryGirl.build(:hint, queue_number: 3 - queue_number)
+    @hint = FactoryGirl.create(:hint, queue_number: @queue_number)
+    @new_hint = FactoryGirl.build(:hint, queue_number: 3 - @queue_number)
     @task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @hint.to_param)
-    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "акпыук", queue_number: 3 - queue_number).attributes
+    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "акпыук", queue_number: 3 - @queue_number).attributes
   end
 
   describe "GET index" do
@@ -100,6 +100,16 @@ describe HintsController do
         post :create, {:hint => @hint_post}, valid_session
         expect(response).to redirect_to(Hint.last)
       end
+
+      it "creates a third Hint" do
+        @new_hint = FactoryGirl.create(:hint, queue_number: 3 - @queue_number)
+        @task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @new_hint.to_param)
+        expect {
+          post :create, {:hint => @hint_post}, valid_session
+        }.to change(Hint, :count).by(0)
+      end
+
+
     end
 
     describe "with invalid params" do

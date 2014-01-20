@@ -33,9 +33,7 @@ describe GamesController do
   before do
     @game = FactoryGirl.create(:game)
     @task = FactoryGirl.create(:task)
-    #@user = FactoryGirl.create(:user)
     @game_task = FactoryGirl.create(:game_task, game_id: @game.to_param, task_id: @task.to_param)
-    @user_game = FactoryGirl.create(:user_game, user_id: @user_id, game_id: @game.to_param)
     @invalid_attributes = FactoryGirl.build(:game, title: "впирапеи", start_date: "01.01.2014 00:00:00".to_datetime).attributes
   end
 
@@ -161,20 +159,53 @@ describe GamesController do
     end
   end
 
-  describe "Start game" do
-    it "execute action " do
-      expect {
+  describe "Start and finish game" do
+    before(:each) do
+      @user_id = FactoryGirl.create(:user).to_param
+      @user_game = FactoryGirl.create(:user_game, user_id: @user_id, game_id: @game.to_param)
+    end
+    describe "Start game" do
+      it "execute action " do
+        expect {
+          get "start_game", {id: @game.to_param}, valid_session
+        }.to change(UserTask, :count).by(1)
+      end
+
+      it "check game state equal to CURRENT" do
         get "start_game", {id: @game.to_param}, valid_session
-      }.to change(UserTask, :count).by(1)
+        expect(Game.find(@game.to_param.to_i).state).to equal(UserGame::CURRENT)
+      end
+
+      it "check user_game state equal to CURRENT" do
+        get "start_game", {id: @game.to_param}, valid_session
+        expect(UserGame.where(user_id: @user_id, game_id:@game.to_param.to_i).first.state).to equal(UserGame::CURRENT)
+      end
+
+    end
+
+    describe "Finish game" do
+
+      before(:each) do
+        @task1 = FactoryGirl.create(:task)
+        @user_task = FactoryGirl.create(:user_task, task_id: @task.to_param, user_id: @user_id, result: 3)
+        @user_task1 = FactoryGirl.create(:user_task, task_id: @task1.to_param, user_id: @user_id, result: 3)
+      end
+
+      it "check game status as equal to COMPLETED" do
+        get "finish_game", {id: @game.to_param}, valid_session
+        expect(Game.find(@game.to_param.to_i).state).to eq(UserGame::COMPLETED)
+      end
+
+      it "check user_game status as equal to COMPLETED" do
+        get "finish_game", {id: @game.to_param}, valid_session
+        expect(UserGame.where(user_id: @user_id, game_id:@game.to_param.to_i).first.state).to eq(UserGame::COMPLETED)
+      end
+
+      it "check user_game points count as equal to user_tasks results sum " do
+        get "finish_game", {id: @game.to_param}, valid_session
+        expect(UserGame.where(user_id: @user_id, game_id:@game.to_param.to_i).first.result).to eq(@user_task.result + @user_task1.result)
+      end
+
     end
   end
-
-  describe "Finish game" do
-    it "execute action " do
-      get "finish_game", {id: @game.to_param}, valid_session
-      expect(Game.find(@game.to_param.to_i).state).to eq(-1)
-      expect(UserGame.find(@user_game.to_param.to_i).state).to eq(-1)
-    end
-  end
-
 end

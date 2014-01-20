@@ -2,9 +2,12 @@ module ControllerMacros
   def login_admin
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
-      @admin = FactoryGirl.create(:admin_user, email: "admin#{rand(1000)}@example.com}") # Using factory girl as an example
+      @admin = FactoryGirl.create(:admin_user, email: "admin#{rand(1000)}@example.com")
       sign_in @admin
-      @admin_id = @admin.to_param
+      @admin_id = @admin.id
+    end
+    after(:each) do
+      AdminUser.find(@admin.id).destroy
     end
   end
 
@@ -12,12 +15,10 @@ module ControllerMacros
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       @user = FactoryGirl.create(:user)
-      #@user.confirm!
       sign_in @user
-      @user_id = @user.to_param
     end
     after(:each) do
-      User.find(@user_id).destroy
+      User.find(@user).destroy
     end
   end
 end
