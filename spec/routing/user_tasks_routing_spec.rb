@@ -1,6 +1,13 @@
 require "spec_helper"
 
 describe UserTasksController do
+
+  let(:user) {create :user}
+
+  let(:task) {create :task}
+
+  let!(:user_task) {create :user_task, user: user, task: task}
+
   describe "routing" do
 
     it "routes to #create" do
@@ -8,7 +15,7 @@ describe UserTasksController do
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/user_tasks/1").to route_to("user_tasks#destroy", :id => "1")
+      expect(:delete => "/user_tasks/#{user_task.id}").to route_to("user_tasks#destroy", :id => "#{user_task.id}")
     end
 
   end

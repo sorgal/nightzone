@@ -35,6 +35,6 @@ class AdminGamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_game_params
-      params.require(:admin_game).permit(:admin_id, :game_id)
+      params.require(:admin_game).permit(:admin_user_id, :game_id)
     end
 end

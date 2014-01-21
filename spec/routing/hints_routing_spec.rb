@@ -1,12 +1,7 @@
 require "spec_helper"
 
 describe HintsController do
-  before do
-    queue_number = rand(1...2)
-    @game = FactoryGirl.create(:game)
-    @hint = FactoryGirl.create(:hint, queue_number: queue_number)
-    @invalid_attributes = FactoryGirl.build(:hint, hint_text: "").attributes
-  end
+  let!(:hint) {create :hint}
   describe "routing" do
 
     it "routes to #index" do
@@ -18,11 +13,11 @@ describe HintsController do
     end
 
     it "routes to #show" do
-      expect(:get => "/hints/1").to route_to("hints#show", :id => "1")
+      expect(:get => "/hints/#{hint.id}").to route_to("hints#show", :id => "#{hint.id}")
     end
 
     it "routes to #edit" do
-      expect(:get => "/hints/1/edit").to route_to("hints#edit", :id => "1")
+      expect(:get => "/hints/#{hint.id}/edit").to route_to("hints#edit", :id => "#{hint.id}")
     end
 
     it "routes to #create" do
@@ -30,11 +25,11 @@ describe HintsController do
     end
 
     it "routes to #update" do
-      expect(:put => "/hints/1").to route_to("hints#update", :id => "1")
+      expect(:put => "/hints/#{hint.id}").to route_to("hints#update", :id => "#{hint.id}")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/hints/1").to route_to("hints#destroy", :id => "1")
+      expect(:delete => "/hints/#{hint.id}").to route_to("hints#destroy", :id => "#{hint.id}")
     end
 
   end

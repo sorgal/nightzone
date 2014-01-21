@@ -17,9 +17,8 @@ class GamesController < ApplicationController
       @status = "Wait"
     elsif @game.state > 0
       @status = "Started"
-      @user_task = UserTask.where(user_id: current_user.id, game_id: @game.id).last
-      @task = Task.find(@user_task.task_id).first
-      @task_codes_count = TaskCode.where(task_id: @user_task.task_id).count
+      @task = current_user.tasks.last
+      @task_codes_count = current_user.tasks.codes.where(task_id: @user_task.task_id).count
     elsif @game.state < 0
       @status = "Finished"
     end
@@ -43,7 +42,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        if AdminGame.create(admin_id: current_admin_user.id, game_id: @game.id)
+        if AdminGame.create(admin_user_id: current_admin_user.id, game_id: @game.id)
           format.html { redirect_to @game, notice: 'Game was successfully created.' }
           format.json { render action: 'show', status: :created, location: @game }
         end
@@ -104,7 +103,7 @@ class GamesController < ApplicationController
   protected
 
   def check_game_status
-    if user_signed_in? && @game.status <= 0
+    if user_signed_in? && @game.state <= 0
       redirect_to root_path
     end
   end

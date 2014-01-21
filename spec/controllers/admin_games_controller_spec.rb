@@ -10,13 +10,13 @@ describe AdminGamesController do
 
   let(:game) {create :game}
 
-  let!(:admin_game) {create :admin_game, game: game, admin: @admin}
+  let!(:admin_game) {create :admin_game, game: game, admin_user: @admin}
 
   describe "POST create" do
     describe "with valid params" do
       it "creates a new AdminGame" do
         expect {
-          post :create, {admin_game: admin_game}, valid_session
+          post :create, {admin_game: admin_game.attributes}, valid_session
         }.to change(AdminGame, :count).by(1)
       end
     end
