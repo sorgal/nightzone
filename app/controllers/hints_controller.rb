@@ -3,7 +3,6 @@ class HintsController < ApplicationController
   before_filter :check_task_create, only: [:create]
   before_filter :no_hints, except: [:new, :create]
   before_action :set_hint, only: [:show, :edit, :update, :destroy]
-  #skip_before_filter :authorize_admin, only: [:show]
 
   # GET /hints
   # GET /hints.json
@@ -89,18 +88,22 @@ class HintsController < ApplicationController
       unless params.require(:task)
           redirect_to games_path
       end
+
     end
 
     def check_task_create
       unless params.require(:hint)[:task]
-        redirect_to games_path
+        redirect_to tasks_path
       end
       task = params.require(:hint)[:task].to_i
-      @task_hints = TaskHint.where(task_id: task)
-      if @task_hints.count > 0
-        @hint = Hint.find(@task_hints.first.hint_id)
-        if @hint.queue_number == params.require(:hint)[:queue_number].to_i
-          redirect_to new_hint_path, notice: "Parameter queue_number must be equal to " +  (3 - params.require(:hint)[:queue_number].to_i).to_s
+      @task = Task.find(task)
+      if @task.hints.count > 0
+        if (@task.hints.count == 1)
+          if @task.hints.first.queue_number == params.require(:hint)[:queue_number].to_i
+            redirect_to new_hint_path, notice: "Parameter queue_number must be equal to " +  (3 - params.require(:hint)[:queue_number].to_i).to_s
+          end
+        elsif @task.hints.count >= 2
+          redirect_to tasks_path, notice: "Only two hints can be assigned with one task"
         end
       end
     end

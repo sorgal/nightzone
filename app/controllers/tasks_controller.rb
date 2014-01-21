@@ -99,22 +99,7 @@ class TasksController < ApplicationController
   public
     #еще заглушка
     def raise_hint
-      TaskHint.where(task_id: @task.id).each do |task_hint|
-        @hint = Hint.find(task_hint.hint_id)
-        if UserHint.where(hint_id: @hint.id).count > 0
-          next
-        else
-          @user_tasks = UserTask.where(task_id: task_hint.task_id)
-          @user_tasks.each do |user_task|
-            if user_task.result < 0
-              UserHint.create(user_id: user_task.user_id, hint_id: @hint.id)
-
-            end
-          end
-          break
-        end
-      end
-
+      @task.raise_hint
       redirect_to tasks_path
     end
 

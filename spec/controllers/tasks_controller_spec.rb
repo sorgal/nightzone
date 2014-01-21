@@ -30,85 +30,90 @@ describe TasksController do
   # TasksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  before do
-    @game = FactoryGirl.create(:game)
-    @task = FactoryGirl.create(:task)
-    @hint = FactoryGirl.create(:hint)
-    @user = FactoryGirl.create(:user)
-    @user_task = FactoryGirl.create(:user_task, user_id: @user.to_param, task_id: @task.to_param)
-    @task_hint = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @hint.to_param)
-    @hint2 = FactoryGirl.create(:hint, hint_text: " wvgrawrfswf", queue_number: 2)
-    @task_hint2 = FactoryGirl.create(:task_hint, task_id: @task.to_param, hint_id: @hint2.to_param)
-    #puts Task.first.to_yaml
-    @invalid_attributes = FactoryGirl.build(:task, task_text: "впирапеи").attributes
-  end
+  let(:game) {create :game}
+
+  let(:task) {create :task}
+
+  let(:hint) {create :hint}
+
+  let!(:user) {create :user}
+
+  let!(:user_task) {create :user_task, user: user, task: task}
+
+  let!(:task_hint) {create :task_hint, task: task, hint: hint}
+
+  let(:hint2) {create :hint, hint_text: " wvgrawrfswf", queue_number: 2}
+
+  let!(:task_hint2) {create :task_hint, task: task, hint: hint2}
+
+  let(:invalid_attributes) {build :task, task_text: "впирапеи"}
+
+  let(:valid_attributes) {build :task, task_text: "zhvnasjfnj"}
 
   describe "GET index" do
     it "assigns all tasks as @tasks" do
       get :index, {}, valid_session
-      expect(assigns(:tasks)).to eq([@task])
+      expect(assigns(:tasks)).to eq([task])
     end
   end
 
   describe "GET show" do
     it "assigns the requested task as @task" do
-      get :show, {:id => @task.to_param}, valid_session
-      expect(assigns(:task)).to eq(@task)
+      get :show, {id: task.id}, valid_session
+      expect(assigns(:task)).to eq(task)
     end
   end
 
   describe "GET new" do
     it "assigns a new task as @task" do
-      get :new, {game: @game.to_param}, valid_session
+      get :new, {game: game.id}, valid_session
       expect(assigns(:task)).to be_a_new(Task)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested task as @task" do
-      get :edit, {:id => @task.to_param}, valid_session
-      expect(assigns(:task)).to eq(@task)
+      get :edit, {id:task.id}, valid_session
+      expect(assigns(:task)).to eq(task)
     end
   end
 
   describe "POST create" do
     before(:each) do
-      @task_post = @task.attributes
-      @task_post[:game] = @game.to_param
-      @task_post_invalid = @invalid_attributes
-      @task_post_invalid[:game] = @game.to_param
+      @task_post = task.attributes
+      @task_post[:game] = game.id
+      @task_post_invalid = invalid_attributes.attributes
+      @task_post_invalid[:game] = game.id
     end
     describe "with valid params" do
       it "creates a new Task" do
         expect {
-          post :create, {:task => @task_post}, valid_session
+          post :create, {task: @task_post}, valid_session
         }.to change(Task, :count).by(1)
       end
 
       it "assigns a newly created task as @task" do
-        post :create, {:task => @task_post}, valid_session
+        post :create, {task: @task_post}, valid_session
         expect(assigns(:task)).to be_a(Task)
         expect(assigns(:task)).to be_persisted
       end
 
       it "redirects to the created task" do
-        post :create, {:task =>@task_post}, valid_session
+        post :create, {task: @task_post}, valid_session
         expect(response).to redirect_to(Task.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved task as @task" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        post :create, {:task => @task_post_invalid}, valid_session
+        post :create, {task: @task_post_invalid}, valid_session
         expect(assigns(:task)).to be_a_new(Task)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        post :create, {:task => @task_post_invalid}, valid_session
+        post :create, {task: @task_post_invalid}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -116,41 +121,33 @@ describe TasksController do
 
   describe "PUT update" do
     describe "with valid params" do
-      before (:each) do
-        @valid_attributes = FactoryGirl.build(:task, task_text: "asfvubasdfchnlasidfciojnk").attributes
-      end
+
       it "updates the requested task" do
-        # Assuming there are no other tasks in the database, this
-        # specifies that the Task created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         expect_any_instance_of(Task).to receive(:update).with({ "task_text" => "arghbstghset" })
-        put :update, {:id => @task.to_param, :task => { "task_text" => "arghbstghset" }}, valid_session
+        put :update, {id: task.id, :task => { "task_text" => "arghbstghset" }}, valid_session
       end
 
       it "assigns the requested task as @task" do
-        put :update, {:id => @task.to_param, :task => @valid_attributes}, valid_session
-        expect(assigns(:task)).to eq(@task)
+        put :update, {id: task.id, task: valid_attributes.attributes}, valid_session
+        expect(assigns(:task)).to eq(task)
       end
 
       it "redirects to the task" do
-        put :update, {:id => @task.to_param, :task => @valid_attributes}, valid_session
-        expect(response).to redirect_to(@task)
+        put :update, {id: task.id, task: valid_attributes.attributes}, valid_session
+        expect(response).to redirect_to(task)
       end
     end
 
     describe "with invalid params" do
       it "assigns the task as @task" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        put :update, {:id => @task.to_param, :task => @invalid_attributes}, valid_session
-        expect(assigns(:task)).to eq(@task)
+        put :update, {id: task.id, task: invalid_attributes.attributes}, valid_session
+        expect(assigns(:task)).to eq(task)
       end
 
       it "re-renders the 'edit' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        put :update, {:id => @task.to_param, :task => @invalid_attributes}, valid_session
+        put :update, {id: task.id, task: invalid_attributes.attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -159,12 +156,12 @@ describe TasksController do
   describe "DELETE destroy" do
     it "destroys the requested task" do
       expect {
-        delete :destroy, {:id => @task.to_param}, valid_session
+        delete :destroy, {id: task.id}, valid_session
       }.to change(Task, :count).by(-1)
     end
 
     it "redirects to the tasks list" do
-      delete :destroy, {:id => @task.to_param}, valid_session
+      delete :destroy, {id: task.id}, valid_session
       expect(response).to redirect_to(tasks_url)
     end
   end
@@ -172,18 +169,46 @@ describe TasksController do
   describe "Raise hint" do
     it "execute action " do
       expect {
-        get "raise_hint", {id: @task.to_param}, valid_session
+        get "raise_hint", {id: task.id}, valid_session
       }.to change(UserHint, :count).by(1)
     end
 
-    it "insert second hint" do
-      @user_hint = FactoryGirl.create(:user_hint, user_id: @user.to_param, hint_id: @hint.to_param)
+    it "raises first hint" do
       expect {
-        get "raise_hint", {id: @task.to_param}, valid_session
+        get "raise_hint", {id: task.id}, valid_session
       }.to change(UserHint, :count).by(1)
-      expect(UserHint.last.hint_id).to eq(@hint2.to_param.to_i)
+      expect(UserHint.last.hint_id).to eq(hint.id)
+      expect(UserHint.count).to eq(1)
     end
 
+    describe "hints count > 1" do
+
+      let!(:user_hint) {create :user_hint, user: user, hint: hint}
+
+      before(:each) do
+        Hint.find(hint.id).update_attribute(:raised, Hint::RAISED)
+      end
+
+      it "raises second hint" do
+        expect {
+          get "raise_hint", {id: task.id}, valid_session
+        }.to change(UserHint, :count).by(1)
+        expect(UserHint.last.hint_id).to eq(hint2.id)
+        expect(UserHint.count).to eq(2)
+      end
+
+      describe "third hint" do
+        let!(:user_hint2) {create :user_hint, user: user, hint: hint2}
+        it "doesn't raise third hint" do
+          Hint.find(hint2.id).update_attribute(:raised, Hint::RAISED)
+          expect {
+            get "raise_hint", {id: task.id}, valid_session
+          }.to change(UserHint, :count).by(0)
+          expect(UserHint.last.hint_id).to eq(hint2.id)
+          expect(UserHint.count).to eq(2)
+        end
+      end
+    end
   end
 
 end

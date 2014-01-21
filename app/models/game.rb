@@ -60,18 +60,35 @@ class Game < ActiveRecord::Base
   end
 
   def assign_next_task(points)
-    puts @user.user_tasks
     @user.user_tasks.last.update_attribute(:result, points)
     @user.user_tasks.create(task: untaken_tasks.first)
   end
 
   def end_game
-    @user.user_games.first.update_attribute(:state, UserGame::COMPLETED)
+    @user.user_games.where(state: UserGame::CURRENT).first.update_attribute(:state, UserGame::COMPLETED)
   end
 
   def untaken_tasks
     completed_ids = self.tasks.for_user(@user.id).pluck(:id)
     @untaken_tasks ||= self.tasks.where('`tasks`.`id` NOT IN (?)', completed_ids.join(',') )
+  end
+
+  def start_game
+    self.update(state: UserGame::CURRENT)
+    #Для каждого user_game генерится user_task. Я не придумал как убрать цикл
+    self.user_games.update_all(state: UserGame::CURRENT)
+    self.user_games.each do |user_game|
+      UserTask.create(user_id: user_game.id, task_id: self.tasks.first.id, result: 0)
+    end
+  end
+
+  def finish_game
+    self.update(state: UserGame::COMPLETED)
+    #Здесь я тоже не придумал как убрать цикл
+    self.user_games.each do |user_game|
+      points = UserTask.where(user_id: user_game.user_id).pluck(:result).inject{|sum, num| sum += num}
+      user_game.update(state: UserGame::COMPLETED, result: points)
+    end
   end
   
 end

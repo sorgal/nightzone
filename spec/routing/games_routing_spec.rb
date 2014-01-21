@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe GamesController do
+
+  let!(:game) {create :game}
+
   describe "routing" do
 
     it "routes to #index" do
@@ -12,11 +15,11 @@ describe GamesController do
     end
 
     it "routes to #show" do
-      expect(:get => "/games/1").to route_to("games#show", :id => "1")
+      expect(:get => "/games/#{game.id}").to route_to("games#show", :id => "#{game.id}")
     end
 
     it "routes to #edit" do
-      expect(:get => "/games/1/edit").to route_to("games#edit", :id => "1")
+      expect(:get => "/games/#{game.id}/edit").to route_to("games#edit", :id => "#{game.id}")
     end
 
     it "routes to #create" do
@@ -24,11 +27,11 @@ describe GamesController do
     end
 
     it "routes to #update" do
-      expect(:put => "/games/1").to route_to("games#update", :id => "1")
+      expect(:put => "/games/#{game.id}").to route_to("games#update", :id => "#{game.id}")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/games/1").to route_to("games#destroy", :id => "1")
+      expect(:delete => "/games/#{game.id}").to route_to("games#destroy", :id => "#{game.id}")
     end
 
   end

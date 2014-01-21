@@ -17,9 +17,8 @@ class GamesController < ApplicationController
       @status = "Wait"
     elsif @game.state > 0
       @status = "Started"
-      @user_task = UserTask.where(user_id: current_user.id, game_id: @game.id).last
-      @task = Task.find(@user_task.task_id).first
-      @task_codes_count = TaskCode.where(task_id: @user_task.task_id).count
+      @task = current_user.tasks.last
+      @task_codes_count = current_user.tasks.codes.where(task_id: @user_task.task_id).count
     elsif @game.state < 0
       @status = "Finished"
     end
@@ -43,7 +42,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        if AdminGame.create(admin_id: current_admin_user.id, game_id: @game.id)
+        if AdminGame.create(admin_user_id: current_admin_user.id, game_id: @game.id)
           format.html { redirect_to @game, notice: 'Game was successfully created.' }
           format.json { render action: 'show', status: :created, location: @game }
         end
@@ -92,33 +91,19 @@ class GamesController < ApplicationController
   public
     #Заглушки для отложенных задач
     def start_game
-      @game.update(state: 1)
-      @user_games = UserGame.where(game_id: @game.id)
-      @game_tasks = GameTask.where(game_id: @game.id).first
-      @user_games.each do |user_game|
-        UserTask.create(user_id: user_game.id, task_id: @game_tasks.task_id, result: 0)
-        user_game.update(state: 1)
-      end
+      @game.start_game
       redirect_to games_path
     end
 
     def finish_game
-      @game.update(state: -1)
-      @user_games = UserGame.where(game_id: @game.id)
-      @user_games.each do |user_game|
-        points = 0
-        UserTask.where(user_id: user_game.user_id).each do |user_task|
-          points += user_task.result
-        end
-        user_game.update(state: -1, result: points)
-      end
+      @game.finish_game
       redirect_to games_path
     end
 
   protected
 
   def check_game_status
-    if user_signed_in? && @game.status <= 0
+    if user_signed_in? && @game.state <= 0
       redirect_to root_path
     end
   end

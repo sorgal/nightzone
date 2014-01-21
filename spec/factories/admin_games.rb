@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :admin_game do
-    admin_id 1
+    admin_user_id 1
     game_id 1
   end
 end
