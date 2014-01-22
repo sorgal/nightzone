@@ -40,6 +40,18 @@ describe CodeComparesController do
         expect(UserGame.find(user_game.id).state).to eq(-1)
       end
 
+      describe "code already inderted" do
+
+        let!(:code_compare) {create :code_compare, code: code, user: user}
+
+        it "insert already inserted code" do
+          expect {
+            post :create, {try_text:  code.code_string, task: task}, valid_session
+          }.to change(CodeCompare, :count).by(0)
+        end
+
+      end
+
       describe "change_task" do
         let(:new_task) { create :task, task_text: "sdgbhdrhndrbhzsgfr" }
         let(:new_code) { create :code, code_string: "dfbdfbndfgnhdfgdfh" }

@@ -1,8 +1,9 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game, :check_game_status, :finish_game]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game, :check_game_status, :finish_game, :check_task]
   skip_before_filter :authorize_admin, only: [:index, :show]
-  before_filter :authenticate_user!, only: [:show]
+  before_filter :authenticate_admin_or_user, only: [:show]
   before_filter :check_game_status, only: [:show]
+  before_filter :check_tasks, only: [:start_game]
   # GET /games
   # GET /games.json
   def index
@@ -17,8 +18,10 @@ class GamesController < ApplicationController
       @status = "Wait"
     elsif @game.state > 0
       @status = "Started"
-      @task = current_user.tasks.last
-      @task_codes_count = current_user.tasks.codes.where(task_id: @user_task.task_id).count
+      @task = current_user.tasks.first
+      @arr = @game.get_task_codes_count(@task, current_user)
+      @code_compares_count = @arr[0]
+      @task_codes_count = @arr[1]
     elsif @game.state < 0
       @status = "Finished"
     end
@@ -105,6 +108,18 @@ class GamesController < ApplicationController
   def check_game_status
     if user_signed_in? && @game.state <= 0
       redirect_to root_path
+    end
+  end
+
+  def authenticate_admin_or_user
+    unless user_signed_in? || current_admin_user
+      redirect_to root_path
+    end
+  end
+
+  def check_tasks
+    if @game.tasks.count == 0
+      redirect_to game_path(@game.id), notice: "You can't start game without tasks"
     end
   end
 

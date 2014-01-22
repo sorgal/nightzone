@@ -7,7 +7,6 @@ class UserGamesController < ApplicationController
   # GET /user_games
   # GET /user_games.json
   def index
-    #@user_games = UserGame.where(""user_id: current_user.id, "`state` >= 0""")
     @user_games = UserGame.where("`user_id` = ? AND `state` >= ?", current_user.id, 0)
     @games = []
     @user_games.each do |user_game|
