@@ -16,6 +16,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
+    @game = params[:game].to_i
     @task = Task.new
   end
 

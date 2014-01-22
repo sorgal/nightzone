@@ -7,6 +7,7 @@
     = f.label :points, :class => 'control-label'
     .controls
       = f.text_field :points, :class => 'text_field'
+  = f.hidden_field :game, value: @game
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '

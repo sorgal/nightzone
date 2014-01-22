@@ -5,7 +5,7 @@ div class="page-header"
     strong= model_class.human_attribute_name(:title) + ':'
     br
       = @game.title
--unless user_signed_in?
+-if current_admin_user
   p
     strong= model_class.human_attribute_name(:start_date) + ':'
     br
@@ -24,6 +24,14 @@ div class="page-header"
       = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(@game), :class => 'btn'
       '
       = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(@game), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
--else
-  -@task_codes_count.each do |num|
-    -render partial: code_compare_form
+-elsif user_signed_in?
+  -if notice
+    = notice
+  -if @code_compares_count > 0
+    = "Already inserted codes #{@code_compares_count}"
+  -i = 1
+  -while i <= @task_codes_count
+    = render partial: "code_compare_form"
+    -i += 1
+
+

@@ -23,37 +23,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="user_tasks_routing_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/routing/user_tasks_routing_spec.rb">
+      <file leaf-file-name="game.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/game.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+            <state line="107" column="91" selection-start="2950" selection-end="2950" vertical-scroll-proportion="0.7940075" vertical-offset="969" max-vertical-offset="1770">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin_games_routing_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/routing/admin_games_routing_spec.rb">
+      <file leaf-file-name="games_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="102" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
+            <state line="23" column="27" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_hints_routing_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/routing/user_hints_routing_spec.rb">
+      <file leaf-file-name="show.html.slim" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/games/show.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller_macros.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spec/support/controller_macros.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="6" selection-start="281" selection-end="281" vertical-scroll-proportion="0.16853933" vertical-offset="0" max-vertical-offset="801">
+            <state line="29" column="0" selection-start="1153" selection-end="1153" vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="645">
               <folding />
             </state>
           </provider>
@@ -69,30 +60,15 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/spec/factories/code_compares.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/code_compares_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/home/index.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/home/game_code_compares.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/home/_form.html.slim" />
-        <option value="$PROJECT_DIR$/spec/controllers/home_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/home_controller.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20140120081734_add_raised_to_hint.rb" />
         <option value="$PROJECT_DIR$/spec/factories/hints.rb" />
         <option value="$PROJECT_DIR$/app/models/hint.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/tasks_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/task.rb" />
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/code_compares_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/app/models/game.rb" />
         <option value="$PROJECT_DIR$/app/models/admin_user.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20140120140458_rename_column_admin_id_from_admin_games_to_admin_user_id.rb" />
         <option value="$PROJECT_DIR$/spec/factories/admin_games.rb" />
         <option value="$PROJECT_DIR$/app/controllers/admin_games_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/codes_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/games_controller.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/codes_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/games_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/hints_controller.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/hints_controller_spec.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/task_codes_controller_spec.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/game_tasks_controller_spec.rb" />
@@ -103,7 +79,6 @@
         <option value="$PROJECT_DIR$/spec/controllers/user_hints_controller_spec.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/user_tasks_controller_spec.rb" />
         <option value="$PROJECT_DIR$/spec/models/code_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/models/game_spec.rb" />
         <option value="$PROJECT_DIR$/app/models/game_task.rb" />
         <option value="$PROJECT_DIR$/spec/models/hint_spec.rb" />
         <option value="$PROJECT_DIR$/spec/models/task_spec.rb" />
@@ -120,6 +95,22 @@
         <option value="$PROJECT_DIR$/spec/routing/admin_games_routing_spec.rb" />
         <option value="$PROJECT_DIR$/spec/routing/user_hints_routing_spec.rb" />
         <option value="$PROJECT_DIR$/spec/support/controller_macros.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/tasks_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/tasks/_form.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/hints/_form.html.slim" />
+        <option value="$PROJECT_DIR$/app/controllers/hints_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/user_games_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/home/index.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/codes/_form.html.slim" />
+        <option value="$PROJECT_DIR$/app/controllers/codes_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/games/_code_compare_form.html.slim" />
+        <option value="$PROJECT_DIR$/spec/controllers/code_compares_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/home_controller.rb" />
+        <option value="$PROJECT_DIR$/spec/controllers/games_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/models/game_spec.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/games_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/games/show.html.slim" />
+        <option value="$PROJECT_DIR$/app/models/game.rb" />
       </list>
     </option>
   </component>
@@ -155,8 +146,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="RailsProjectView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -185,7 +174,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -199,11 +188,55 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="support" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="games" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -221,8 +254,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="RailsProjectView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -441,7 +512,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20218182" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20945455" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -449,12 +520,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891566" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891566" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -473,9 +544,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20218182" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -495,236 +566,49 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user_task.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="0" selection-end="219" vertical-scroll-proportion="0.14981273" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user_hint.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="777" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user_game.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="226" selection-end="226" vertical-scroll-proportion="0.2059925" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/factories/hints.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="10" selection-start="236" selection-end="236" vertical-scroll-proportion="0.11235955" vertical-offset="0" max-vertical-offset="801" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/task.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="43" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="1306" selection-end="1306" vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="990" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/admin_user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="40" selection-start="240" selection-end="240" vertical-scroll-proportion="0.074906364" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20140115190550_add_state_to_user_games.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="18" selection-start="69" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20140120140458_rename_column_admin_id_from_admin_games_to_admin_user_id.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="160" selection-end="160" vertical-scroll-proportion="0.096525095" vertical-offset="0" max-vertical-offset="777">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/admin_game.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/factories/admin_games.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="161" selection-end="161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin_games_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="52" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.6928839" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/code_compares_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="12" selection-start="254" selection-end="254" vertical-scroll-proportion="0.11235955" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/codes_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="1" selection-start="2861" selection-end="2861" vertical-scroll-proportion="0.66292137" vertical-offset="954" max-vertical-offset="2115">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="19" selection-start="2589" selection-end="2589" vertical-scroll-proportion="0.9812734" vertical-offset="684" max-vertical-offset="1755">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/hints_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="33" selection-start="3923" selection-end="3923" vertical-scroll-proportion="0.5131086" vertical-offset="1524" max-vertical-offset="2325">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/hints_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="0" selection-start="2366" selection-end="2366" vertical-scroll-proportion="0.50507617" vertical-offset="1057" max-vertical-offset="1845">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/codes_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="19" selection-start="1940" selection-end="1940" vertical-scroll-proportion="0.43820226" vertical-offset="774" max-vertical-offset="1575">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/code_compares_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="45" selection-start="2513" selection-end="2513" vertical-scroll-proportion="0.9625468" vertical-offset="249" max-vertical-offset="1185">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/admin_games_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="52" selection-start="428" selection-end="428" vertical-scroll-proportion="0.33707866" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/task_codes_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="28" selection-start="301" selection-end="301" vertical-scroll-proportion="0.28089887" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="15" column="28" selection-start="301" selection-end="301" vertical-scroll-proportion="0.28089887" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/task_hints_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="29" selection-start="652" selection-end="652" vertical-scroll-proportion="0.505618" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="27" column="29" selection-start="652" selection-end="652" vertical-scroll-proportion="0.505618" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/tasks_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="69" selection-start="6595" selection-end="6595" vertical-scroll-proportion="0.6254682" vertical-offset="2499" max-vertical-offset="3300">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/user_games_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="7" selection-start="162" selection-end="195" vertical-scroll-proportion="-0.10486891" vertical-offset="129" max-vertical-offset="1605">
-          <folding />
-        </state>
+        <state line="200" column="69" selection-start="6595" selection-end="6595" vertical-scroll-proportion="0.6254682" vertical-offset="2499" max-vertical-offset="3300" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/user_games_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="6" selection-start="149" selection-end="149" vertical-scroll-proportion="0.18726592" vertical-offset="0" max-vertical-offset="2010">
-          <folding />
-        </state>
+        <state line="10" column="6" selection-start="149" selection-end="149" vertical-scroll-proportion="0.18726592" vertical-offset="0" max-vertical-offset="2010" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/user_hints_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="29" selection-start="234" selection-end="281" vertical-scroll-proportion="0.411985" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="22" column="29" selection-start="234" selection-end="281" vertical-scroll-proportion="0.411985" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/user_tasks_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="12" selection-start="67" selection-end="67" vertical-scroll-proportion="0.056179777" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="3" column="12" selection-start="67" selection-end="67" vertical-scroll-proportion="0.056179777" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/user_hints_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="68" selection-end="148" vertical-scroll-proportion="0.11235955" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="6" column="0" selection-start="68" selection-end="148" vertical-scroll-proportion="0.11235955" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/code_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="7" selection-start="47" selection-end="47" vertical-scroll-proportion="0.056179777" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="3" column="7" selection-start="47" selection-end="47" vertical-scroll-proportion="0.056179777" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/game_tasks_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="27" selection-start="207" selection-end="207" vertical-scroll-proportion="0.2059925" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/games_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="29" selection-start="4735" selection-end="4735" vertical-scroll-proportion="2.4232209" vertical-offset="414" max-vertical-offset="2835">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/game_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="10" selection-start="2998" selection-end="2998" vertical-scroll-proportion="0.47565544" vertical-offset="924" max-vertical-offset="1725">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/game.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="14" selection-start="1517" selection-end="1517" vertical-scroll-proportion="1.235955" vertical-offset="0" max-vertical-offset="1500">
-          <folding />
-        </state>
+        <state line="11" column="27" selection-start="207" selection-end="207" vertical-scroll-proportion="0.2059925" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/game_task.rb">
@@ -743,79 +627,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/hint_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="7" selection-start="48" selection-end="48" vertical-scroll-proportion="0.074906364" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="4" column="7" selection-start="48" selection-end="48" vertical-scroll-proportion="0.074906364" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/task_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="54" selection-start="1633" selection-end="1633" vertical-scroll-proportion="0.7940075" vertical-offset="249" max-vertical-offset="1095">
-          <folding />
-        </state>
+        <state line="59" column="54" selection-start="1633" selection-end="1633" vertical-scroll-proportion="0.7940075" vertical-offset="249" max-vertical-offset="1095" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/game_tasks_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="52" selection-start="403" selection-end="403" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="17" column="52" selection-start="403" selection-end="403" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/codes_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="39" selection-start="364" selection-end="364" vertical-scroll-proportion="0.28089887" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="15" column="39" selection-start="364" selection-end="364" vertical-scroll-proportion="0.28089887" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/code_compares_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="58" selection-start="424" selection-end="424" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="17" column="58" selection-start="424" selection-end="424" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/games_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="39" selection-start="728" selection-end="728" vertical-scroll-proportion="0.54307115" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="29" column="39" selection-start="728" selection-end="728" vertical-scroll-proportion="0.54307115" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/hints_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="92" selection-start="906" selection-end="906" vertical-scroll-proportion="0.5805243" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="31" column="92" selection-start="906" selection-end="906" vertical-scroll-proportion="0.5805243" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/task_codes_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="104" selection-start="455" selection-end="455" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="17" column="104" selection-start="455" selection-end="455" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/task_hints_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="51" selection-start="402" selection-end="402" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="17" column="51" selection-start="402" selection-end="402" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/tasks_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="92" selection-start="912" selection-end="912" vertical-scroll-proportion="0.6179775" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="33" column="92" selection-start="912" selection-end="912" vertical-scroll-proportion="0.6179775" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/user_games_routing_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="52" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.6928839" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
+        <state line="37" column="52" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.6928839" vertical-offset="0" max-vertical-offset="801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/routing/user_tasks_routing_spec.rb">
@@ -842,6 +704,181 @@
     <entry file="file://$PROJECT_DIR$/spec/support/controller_macros.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="6" selection-start="281" selection-end="281" vertical-scroll-proportion="0.16853933" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/tasks/new.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/tasks/_form.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="38" selection-start="376" selection-end="376" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hints/new.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hints/_form.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="562" selection-end="562" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/hints_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="86" selection-start="2687" selection-end="2687" vertical-scroll-proportion="0.61675125" vertical-offset="1044" max-vertical-offset="1845">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/index.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="31" selection-start="507" selection-end="507" vertical-scroll-proportion="0.27027026" vertical-offset="0" max-vertical-offset="777">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/user_games_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="966" selection-end="966" vertical-scroll-proportion="0.6928839" vertical-offset="0" max-vertical-offset="1590">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_games/index.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="16" selection-start="593" selection-end="593" vertical-scroll-proportion="0.33376962" vertical-offset="0" max-vertical-offset="764">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/new.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/tasks_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="30" selection-start="463" selection-end="463" vertical-scroll-proportion="0.25093633" vertical-offset="69" max-vertical-offset="1695">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/codes/new.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/codes_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="30" selection-start="451" selection-end="451" vertical-scroll-proportion="0.35580525" vertical-offset="0" max-vertical-offset="1590">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/codes/_form.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="427" selection-end="427" vertical-scroll-proportion="0.21235521" vertical-offset="0" max-vertical-offset="777">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/_form.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/_code_compare_form.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="777">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.2247191" vertical-offset="180" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/controllers/code_compares_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="11" selection-start="1445" selection-end="1783" vertical-scroll-proportion="0.68164796" vertical-offset="159" max-vertical-offset="1365">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/home_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="236" selection-end="236" vertical-scroll-proportion="0.14981273" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/controllers/games_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="26" selection-start="1563" selection-end="1563" vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="3255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/models/game_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="129" column="50" selection-start="4434" selection-end="4434" vertical-scroll-proportion="0.0" vertical-offset="1209" max-vertical-offset="2115">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="27" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/show.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="1153" selection-end="1153" vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/game.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="91" selection-start="2950" selection-end="2950" vertical-scroll-proportion="0.7940075" vertical-offset="969" max-vertical-offset="1770">
           <folding />
         </state>
       </provider>

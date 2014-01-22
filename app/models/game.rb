@@ -14,17 +14,21 @@ class Game < ActiveRecord::Base
       notice = "Pass was matched. #{next_task(0)}"
     else
       if matched_code = @task.codes.where(code_string: try_text).first
-        new_code_compare = @user.code_compares.build(code: matched_code)
-        if new_code_compare.save
-          if all_codes_input?
-            notice = "Code was matched. #{next_task(@task.points - @user.hints.count)}"
+        if check_already_inserted_code(matched_code.id)
+          notice = "Compare for this code created early"
+        else
+          new_code_compare = @user.code_compares.build(code: matched_code)
+          if new_code_compare.save
+            if all_codes_input?
+              notice = "Code was matched. #{next_task(@task.points - @user.hints.count)}"
+            end
           end
         end
       end
     end
 
-    if notice == ""
-      notice += "Code or pass was not matched"
+    unless notice
+      notice = "Code or pass was not matched"
     end
     @notice = notice
   end
@@ -90,5 +94,19 @@ class Game < ActiveRecord::Base
       user_game.update(state: UserGame::COMPLETED, result: points)
     end
   end
-  
+
+  def check_already_inserted_code(code)
+    if @user.code_compares.where(code_id: code).first
+      return true
+    else
+      return false
+    end
+  end
+
+  def get_task_codes_count(task, user)
+    task_codes = task.codes.pluck(:id)
+    code_compares = user.code_compares.where('`code_compares`.`code_id` IN (?)', task_codes).count
+    return [code_compares, task_codes.count - code_compares]
+  end
+
 end

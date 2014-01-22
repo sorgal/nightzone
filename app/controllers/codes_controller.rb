@@ -17,6 +17,7 @@ class CodesController < ApplicationController
 
   # GET /codes/new
   def new
+    @task = params[:task].to_i
     @code = Code.new
   end
 

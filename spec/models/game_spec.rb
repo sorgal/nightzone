@@ -45,6 +45,20 @@ describe Game do
       expect(game.process(user, task, "1234567890") == "Code was matched. Game completed")
       expect(UserGame.find(user_game.id).state).to eq(-1)
     end
+
+    describe "code already inderted" do
+
+      let!(:code_compare) {create :code_compare, code: code, user: user}
+
+      it "insert already inserted code" do
+        count = CodeCompare.count
+        expect(game.process(user, task, code.code_string) == "Compare for this code created early")
+        expect(CodeCompare.count).to equal(count)
+      end
+
+    end
+
+
     describe "assign next task" do
       let!(:new_task) {create :task, task_text: "sdgbhdrhndrbhzsgfr"}
       let!(:new_code) {create :code, code_string: "dfbdfbndfgnhdfgdfh"}
@@ -106,4 +120,16 @@ describe Game do
 
     end
   end
+
+  describe "get_task_codes_count" do
+
+    let!(:code_compare) {create :code_compare, code: code, user: user}
+
+    it "returns array with code_compare forms count" do
+      Game.find(game.id).update(state: UserGame::CURRENT)
+      expect(game.get_task_codes_count(task, user) == [CodeCompare.count, TaskCode.count - CodeCompare.count])
+    end
+
+  end
+
 end
