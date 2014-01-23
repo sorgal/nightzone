@@ -25,15 +25,20 @@ html lang="en"
       .navbar-inner
         .container
             ul.nav
-              - if user_signed_in?
-                li = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
-                li = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
-                li
-                  span Logged in as #{current_user.email}
-                  //strong = current_user.email
+              - if !current_admin_user
+                - if user_signed_in?
+                  li = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
+                  li = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+                  li
+                    span Logged in as #{current_user.email}
+                    //strong = current_user.email
+                -else
+                  li = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
+                  li = link_to "Login", new_user_session_path, :class => 'navbar-link'
               -else
-                li = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
-                li = link_to "Login", new_user_session_path, :class => 'navbar-link'
+                li = link_to "Logout", "/admin/logout", method: :delete, :class => 'navbar-link'
+                li
+                  span Logged in as #{current_admin_user.email}
 
     .container
 
@@ -41,3 +46,16 @@ html lang="en"
         .span9
           = bootstrap_flash
           = yield
+        .span3
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.nav-header Sidebar
+              -if user_signed_in?
+                li= link_to "Home", root_path
+                li= link_to "User games", user_games_path
+              -elsif current_admin_user
+                li= link_to "Admin", "/admin"
+                li= link_to "Games", games_path
+                li= link_to "Tasks", tasks_path
+                li= link_to "Codes", codes_path
+                li= link_to "Hints", hintss_path

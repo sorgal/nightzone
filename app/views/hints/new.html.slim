@@ -1,11 +1,16 @@
 -model_class = Hint
 div class="page-header"
-  -unless @cant_add
-    -if notice
-      h1 = notice
+  -if !@cant_add
     h1=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize
     = render :partial => "form"
   -else
-    h1 You can't add more hints for this task
+    -if @error
+      h1= @error
+    p
+      strong= 'Task:'
+      br
+        = link_to "Task", task_path(@task)
+
+
 
 

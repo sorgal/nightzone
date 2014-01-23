@@ -10,6 +10,10 @@ p
   strong= model_class.human_attribute_name(:points) + ':'
   br
   = @task.points
+p
+  strong= 'Game:'
+  br
+  = link_to @game.title, game_path(@game)
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), tasks_path, :class => 'btn'

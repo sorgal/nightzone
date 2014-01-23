@@ -9,8 +9,12 @@ class UserGamesController < ApplicationController
   def index
     @user_games = UserGame.where("`user_id` = ? AND `state` >= ?", current_user.id, 0)
     @games = []
+    i = 0
     @user_games.each do |user_game|
-      @games << Game.find(user_game.game_id)
+      @games[i] = {}
+      @games[i][:game] =  Game.find(user_game.game_id)
+      @games[i][:user_game] = user_game.id
+      i += 1
     end
   end
 

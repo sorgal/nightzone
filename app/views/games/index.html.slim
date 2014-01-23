@@ -4,27 +4,38 @@ div class="page-header"
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:title)
       th= model_class.human_attribute_name(:start_date)
-      th= model_class.human_attribute_name(:created_at)
-      th=t '.actions', :default => t("helpers.actions")
+      -if current_admin_user
+        th= model_class.human_attribute_name(:state)
+        th=t '.actions', :default => t("helpers.actions")
   tbody
     - @games.each do |game|
+      -if !current_admin_user && game.state < 0
+        -next
       tr
-        td= link_to game.id, game_path(game)
-        td= game.title
+        -if current_admin_user
+          td= link_to game.title, game_path(game)
+        else
+          td= game.title
         td= game.start_date
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
+        -if current_admin_user
+          -if game.state == 0
+            td= "Intact"
+          -elsif game.state > 0
+            td= "Started"
+          -else
+            td= "Completed"
+          td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
 
-          = link_to "New_task", new_task_path(game: game.id), :class => 'btn'
+            = link_to "Add task", new_task_path(game: game.id), :class => 'btn btn-mini'
 
-          = link_to "Start game", {controller: "games", action: "start_game", id: game.id}, :class => 'btn'
+            = link_to "Start game", {controller: "games", action: "start_game", id: game.id}, :class => 'btn btn-mini'
 
-          = link_to "Finish_game", {controller: "games", action: "finish_game", id: game.id}, :class => 'btn'
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(game), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
-
-= link_to t('.new', :default => t("helpers.links.new")), new_game_path, :class => 'btn btn-primary'
+            = link_to "Finish game", {controller: "games", action: "finish_game", id: game.id}, :class => 'btn btn-mini'
+            '
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(game), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+-if current_admin_user
+  = link_to t('.new', :default => t("helpers.links.new")), new_game_path, :class => 'btn btn-primary'
 

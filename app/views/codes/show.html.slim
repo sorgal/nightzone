@@ -6,6 +6,10 @@ p
   strong= model_class.human_attribute_name(:code_string) + ':'
   br
   = @code.code_string
+p
+  strong= 'Task:'
+  br
+  = link_to "Task", task_path(@task)
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), codes_path, :class => 'btn'

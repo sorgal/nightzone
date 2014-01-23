@@ -13,6 +13,8 @@ describe CodesController do
 
   let!(:valid_attributes) {build :code, code_string: "eghrfhfhfh"}
 
+  let!(:task_code) {create :task_code, task: task, code: code}
+
   describe "GET index" do
     it "assigns all codes as @codes" do
       get :index, {}, valid_session

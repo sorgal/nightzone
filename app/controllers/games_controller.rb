@@ -4,6 +4,7 @@ class GamesController < ApplicationController
   before_filter :authenticate_admin_or_user, only: [:show]
   before_filter :check_game_status, only: [:show]
   before_filter :check_tasks, only: [:start_game]
+
   # GET /games
   # GET /games.json
   def index

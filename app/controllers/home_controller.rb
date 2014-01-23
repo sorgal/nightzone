@@ -4,5 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @games = Game.where("`state` >= ?", 0)
+    @user_games = current_user.user_games
   end
 end

@@ -13,6 +13,7 @@ class CodesController < ApplicationController
   # GET /codes/1
   # GET /codes/1.json
   def show
+    @task = Task.find(@code.task_code.task_id)
   end
 
   # GET /codes/new

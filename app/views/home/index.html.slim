@@ -2,20 +2,25 @@
     table class="table table-striped"
       thead
         tr
-          th= Game.human_attribute_name(:id)
           th= Game.human_attribute_name(:title)
           th= Game.human_attribute_name(:start_date)
-          th= Game.human_attribute_name(:duration)
-          th= Game.human_attribute_name(:created_at)
           th=t '.actions', :default => t("helpers.actions")
       tbody
         - @games.each do |game|
           tr
+            -if game.state != 0
+              -next
             td= game.title
             td= game.start_date
-            - if game.state == 0
-              td
+            td
+              -detected = false
+              -@user_games.each do |user_game|
+                -if user_game.game_id == game.id
+                  -detected = true
+                  -break
+              -unless detected
                 = button_to "Join", {controller: "user_games", action: "create", game_id: game.id}, :class => 'btn btn-mini'
+
 
 - else
   div id="main"
