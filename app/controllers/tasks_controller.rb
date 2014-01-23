@@ -84,6 +84,9 @@ class TasksController < ApplicationController
       unless params.require(:game)
         redirect_to games_path
       end
+      if Game.find(params.require(:game).to_i).state != 0
+        redirect_to game_path(Game.find(params.require(:game))), notice: "You can't add new tasks to started or finished game"
+      end
     end
 
     def check_game_create

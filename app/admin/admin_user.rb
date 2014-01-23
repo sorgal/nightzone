@@ -20,4 +20,8 @@ ActiveAdmin.register AdminUser do
     f.actions
   end
 
+  controller do
+    layout 'application'
+  end
+
 end

@@ -14,6 +14,10 @@ describe GamesController do
 
   let(:valid_attributes) {build :game, title: "title_1"}
 
+  let(:code) {create :code}
+
+  let!(:task_code) {create :task_code, task: task, code: code}
+
   describe "without sign in" do
     describe "GET show" do
       it "assigns the requested game as @game" do
@@ -36,10 +40,6 @@ describe GamesController do
 
     describe "GET show" do
       login_user
-
-      let(:code) {create :code}
-
-      let!(:task_code) {create :task_code, task: task, code: code}
 
       let!(:code_compare) {create :code_compare, code: code, user: @user}
 
@@ -164,20 +164,43 @@ describe GamesController do
       let!(:user_game) {create :user_game, game: game, user: user}
 
       describe "Start game" do
-        it "execute action " do
-          expect {
+        describe "start intact game" do
+          it "execute action " do
+            expect {
+              get "start_game", {id: game.id}, valid_session
+            }.to change(UserTask, :count).by(1)
+          end
+
+          it "check game state equal to CURRENT" do
             get "start_game", {id: game.id}, valid_session
-          }.to change(UserTask, :count).by(1)
+            expect(Game.find(game.id).state).to equal(UserGame::CURRENT)
+          end
+
+          it "check user_game state equal to CURRENT" do
+            get "start_game", {id: game.id}, valid_session
+            expect(UserGame.where(user_id: user.id, game_id: game.id).first.state).to equal(UserGame::CURRENT)
+          end
         end
 
-        it "check game state equal to CURRENT" do
-          get "start_game", {id: game.id}, valid_session
-          expect(Game.find(game.id).state).to equal(UserGame::CURRENT)
-        end
+        describe "start already started or finished game" do
 
-        it "check user_game state equal to CURRENT" do
-          get "start_game", {id: game.id}, valid_session
-          expect(UserGame.where(user_id: user.id, game_id: game.id).first.state).to equal(UserGame::CURRENT)
+          it "starts already started game" do
+            Game.find(game.id).update(state: UserGame::CURRENT)
+            expect {
+              get "start_game", {id: game.id}, valid_session
+            }.to change(UserTask, :count).by(0)
+            expect(response).to redirect_to(game_path(game))
+          end
+
+          it "starts already finished game" do
+            Game.find(game.id).update(state: UserGame::COMPLETED)
+            expect {
+              get "start_game", {id: game.id}, valid_session
+            }.to change(UserTask, :count).by(0)
+            expect(response).to redirect_to(game_path(game))
+          end
+
+
         end
 
       end
@@ -189,6 +212,13 @@ describe GamesController do
         let!(:user_task) {create :user_task, user: user, task: task, result: 3}
 
         let!(:user_task1) {create :user_task, user: user, task: task1, result: 3}
+
+        let!(:game_task1) {create :game_task, game: game, task: task1}
+
+        before(:each) do
+          Game.find(game.id).update(state: UserGame::CURRENT)
+          UserGame.where(user_id: user.id, game_id: game.id).first.update(state: UserGame::CURRENT)
+        end
 
         it "check game status as equal to COMPLETED" do
           get "finish_game", {id: game.id}, valid_session
@@ -203,6 +233,27 @@ describe GamesController do
         it "check user_game points count as equal to user_tasks results sum " do
           get "finish_game", {id: game.id}, valid_session
           expect(UserGame.where(user_id: user.id, game_id: game.id).first.result).to eq(user_task.result + user_task1.result)
+        end
+
+        describe "finsh not started or finished game" do
+
+          it "finish not started game" do
+            Game.find(game.id).update(state: UserGame::INTACT)
+            expect {
+              get "finish_game", {id: game.id}, valid_session
+            }.to change(UserTask, :count).by(0)
+            expect(response).to redirect_to(game_path(game))
+          end
+
+          it "starts already finished game" do
+            Game.find(game.id).update(state: UserGame::COMPLETED)
+            expect {
+              get "start_game", {id: game.id}, valid_session
+            }.to change(UserTask, :count).by(0)
+            expect(response).to redirect_to(game_path(game))
+          end
+
+
         end
 
       end

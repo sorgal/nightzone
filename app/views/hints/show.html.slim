@@ -13,7 +13,7 @@ p
 p
   strong= 'Task:'
   br
-  = link_to "Task", task_path(@task)
+  = link_to @task.task_text, task_path(@task)
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), hints_path, :class => 'btn'

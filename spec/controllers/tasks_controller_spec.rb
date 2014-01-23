@@ -30,7 +30,7 @@ describe TasksController do
   # TasksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  let(:game) {create :game}
+  let!(:game) {create :game}
 
   let(:task) {create :task}
 
@@ -69,6 +69,27 @@ describe TasksController do
       get :new, {game: game.id}, valid_session
       expect(assigns(:task)).to be_a_new(Task)
     end
+
+    describe "when game was started or finished" do
+
+      before(:each) do
+        Game.find(game.id).update(state: UserGame::CURRENT)
+      end
+
+      it "tries to create a new Task when game was started" do
+        get :new, {game: game.id}, valid_session
+        expect(response).to redirect_to(game_path(game))
+      end
+
+      it "tries to create a new Hint when game was finished" do
+        Game.find(game.id).update(state: UserGame::COMPLETED)
+        get :new, {game: game.id}, valid_session
+        expect(response).to redirect_to(game_path(game))
+      end
+
+
+    end
+
   end
 
   describe "GET edit" do
@@ -85,6 +106,7 @@ describe TasksController do
       @task_post_invalid = invalid_attributes.attributes
       @task_post_invalid[:game] = game.id
     end
+
     describe "with valid params" do
       it "creates a new Task" do
         expect {

@@ -5,6 +5,8 @@ div class="page-header"
     strong= model_class.human_attribute_name(:title) + ':'
     br
       = @game.title
+//-if notice
+  div.alert.alert-danger = notice
 -if current_admin_user
   p
     strong= model_class.human_attribute_name(:start_date) + ':'
@@ -15,7 +17,7 @@ div class="page-header"
     br
       -if @game.state == 0
         = "Intact"
-      -elsif game.state > 0
+      -elsif @game.state > 0
         = "Started"
       -else
         = "Completed"
@@ -33,13 +35,17 @@ div class="page-header"
       = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(@game), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
 
 -elsif user_signed_in?
-  -if notice
-    = notice
-  -if @code_compares_count > 0
-    = "Already inserted codes #{@code_compares_count}"
-  -i = 1
-  -while i <= @task_codes_count
-    = render partial: "code_compare_form"
-    -i += 1
+  -if @user_game.state < 0
+    h1= "This game is already complete for you. Your result is: #{@user_game.result}"
+  -elsif @user_game.state == 0
+    h1= "This game will start for you later"
+  -else
+    h1= "Your current task: #{@task.task_text}"
+    -if @code_compares_count > 0
+      = "Already inserted codes #{@code_compares_count}"
+    -i = 1
+    -while i <= @task_codes_count
+      = render partial: "code_compare_form"
+      -i += 1
 
 

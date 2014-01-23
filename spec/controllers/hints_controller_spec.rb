@@ -5,7 +5,7 @@ describe HintsController do
 
   let(:valid_session) { {} }
 
-  let(:task) {create :task}
+  let!(:task) {create :task}
 
   let(:hint) {create :hint, queue_number: rand(1...2)}
 
@@ -31,10 +31,33 @@ describe HintsController do
   end
 
   describe "GET new" do
+
+
+    let!(:game) {create :game}
+
+    let!(:task_game) {create :game_task, task: task, game: game}
+
     it "assigns a new hint as @hint" do
       get :new, {task: task.id}, valid_session
       expect(assigns(:hint)).to be_a_new(Hint)
     end
+
+    describe "when game was started and finished" do
+
+      it "tries to create a new Hint when game was started" do
+        Game.find(game.id).update( state: UserGame::CURRENT)
+        get :new, {task: task.id}, valid_session
+        expect(response).to redirect_to(task_path(task))
+      end
+
+      it "tries to create a new Hint when game was finished" do
+        Game.find(game.id).update(state: UserGame::COMPLETED)
+        get :new, {task: task.id}, valid_session
+        expect(response).to redirect_to(task_path(task))
+      end
+
+    end
+
   end
 
   describe "GET edit" do
@@ -45,6 +68,13 @@ describe HintsController do
   end
 
   describe "POST create" do
+
+    before(:each) do
+      @hint_post = new_hint.attributes
+      @hint_post[:task] = task.id
+      @hint_post_invalid = invalid_attributes.attributes
+      @hint_post_invalid[:task] = task.id
+    end
 
     let(:new_hint) {create :hint, queue_number: 3 - hint.queue_number}
 
@@ -60,12 +90,6 @@ describe HintsController do
 
     end
 
-    before(:each) do
-      @hint_post = new_hint.attributes
-      @hint_post[:task] = task.id
-      @hint_post_invalid = invalid_attributes.attributes
-      @hint_post_invalid[:task] = task.id
-    end
     describe "with valid params" do
       it "creates a new Hint" do
         expect {

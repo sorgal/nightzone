@@ -19,8 +19,9 @@ class Game < ActiveRecord::Base
         else
           new_code_compare = @user.code_compares.build(code: matched_code)
           if new_code_compare.save
+            notice = "Code was matched"
             if all_codes_input?
-              notice = "Code was matched. #{next_task(@task.points - @user.hints.count)}"
+              notice += ". #{next_task(@task.points - @user.hints.count)}"
             end
           end
         end
@@ -34,7 +35,7 @@ class Game < ActiveRecord::Base
   end
 
   def all_codes_input?
-    if @user.code_compares.count == @task.codes.count
+    if get_task_codes_count(@task, @user)[1] == 0
       return true
     else
       return false
@@ -50,8 +51,9 @@ class Game < ActiveRecord::Base
   end
 
   def next_task(points)
+    change_task_result(points)
     if has_more_tasks?
-      assign_next_task(points)
+      assign_next_task
       "Next task assigned"
     else
       end_game
@@ -63,18 +65,23 @@ class Game < ActiveRecord::Base
     untaken_tasks.any?
   end
 
-  def assign_next_task(points)
-    @user.user_tasks.last.update_attribute(:result, points)
+  def assign_next_task
     @user.user_tasks.create(task: untaken_tasks.first)
   end
 
+  def change_task_result(points)
+    @user.user_tasks.last.update_attribute(:result, points)
+  end
+
   def end_game
-    @user.user_games.where(state: UserGame::CURRENT).first.update_attribute(:state, UserGame::COMPLETED)
+    get_current_game_tasks
+    points = @user.user_tasks.where("`user_tasks`.`task_id` IN (?)", @current_game_tasks).pluck(:result).inject{|sum, num| sum += num}
+    @user.user_games.where(game_id: self.id).first.update(state: UserGame::COMPLETED, result: points)
   end
 
   def untaken_tasks
     completed_ids = self.tasks.for_user(@user.id).pluck(:id)
-    @untaken_tasks ||= self.tasks.where('`tasks`.`id` NOT IN (?)', completed_ids.join(',') )
+    @untaken_tasks ||= self.tasks.where('`tasks`.`id` NOT IN (?)', completed_ids )
   end
 
   def start_game
@@ -82,16 +89,23 @@ class Game < ActiveRecord::Base
     #Для каждого user_game генерится user_task. Я не придумал как убрать цикл
     self.user_games.update_all(state: UserGame::CURRENT)
     self.user_games.each do |user_game|
-      UserTask.create(user_id: user_game.id, task_id: self.tasks.first.id, result: 0)
+      UserTask.create(user_id: user_game.user_id, task_id: self.tasks.first.id, result: 0)
     end
+  end
+
+  def get_current_game_tasks
+    @current_game_tasks = self.tasks.pluck(:id)
   end
 
   def finish_game
     self.update(state: UserGame::COMPLETED)
+    get_current_game_tasks
     #Здесь я тоже не придумал как убрать цикл
     self.user_games.each do |user_game|
-      points = UserTask.where(user_id: user_game.user_id).pluck(:result).inject{|sum, num| sum += num}
-      user_game.update(state: UserGame::COMPLETED, result: points)
+      if user_game.state > 0
+        points = UserTask.where("`user_tasks`.`task_id` IN (?)", @current_game_tasks).where(user_id: user_game.user_id).pluck(:result).inject{|sum, num| sum += num}
+        user_game.update(state: UserGame::COMPLETED, result: points)
+      end
     end
   end
 

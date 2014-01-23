@@ -7,13 +7,13 @@ class UserGamesController < ApplicationController
   # GET /user_games
   # GET /user_games.json
   def index
-    @user_games = UserGame.where("`user_id` = ? AND `state` >= ?", current_user.id, 0)
+    @user_games = UserGame.where("`user_id` = ?", current_user.id)
     @games = []
     i = 0
     @user_games.each do |user_game|
       @games[i] = {}
       @games[i][:game] =  Game.find(user_game.game_id)
-      @games[i][:user_game] = user_game.id
+      @games[i][:user_game] = user_game
       i += 1
     end
   end

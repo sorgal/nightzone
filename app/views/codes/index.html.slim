@@ -6,12 +6,14 @@ table class="table table-striped"
     tr
       th= "Show"
       th= model_class.human_attribute_name(:code_string)
+      th= "To assign new code "
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @codes.each do |code|
       tr
         td= link_to "Show", code_path(code)
         td= code.code_string
+        td= link_to code.task_code.task.task_text, task_path(code.task_code.task)
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_code_path(code), :class => 'btn btn-mini'
           '

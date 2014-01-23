@@ -7,6 +7,7 @@ table class="table table-striped"
       th= "Show"
       th= model_class.human_attribute_name(:hint_text)
       th= model_class.human_attribute_name(:queue_number)
+      th= "Task"
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @hints.each do |hint|
@@ -14,6 +15,7 @@ table class="table table-striped"
         td= link_to "Show", hint_path(hint)
         td= hint.hint_text
         td= hint.queue_number
+        td= link_to hint.task_hint.task.task_text, task_path(hint.task_hint.task)
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_hint_path(hint), :class => 'btn btn-mini'
           '

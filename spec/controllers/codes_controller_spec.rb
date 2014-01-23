@@ -23,17 +23,47 @@ describe CodesController do
   end
 
   describe "GET show" do
+
+    let(:game) {create :game}
+
+    let!(:task_game) {create :game_task, task: task, game: game}
+
     it "assigns the requested code as @code" do
       get :show, {id: code.id}, valid_session
       expect(assigns(:code)).to eq(code)
     end
+
   end
 
   describe "GET new" do
+
+    let!(:game) {create :game}
+
+    let!(:task_game) {create :game_task, task: task, game: game}
+
     it "assigns a new code as @code" do
       get :new, {task: task.id}, valid_session
       expect(assigns(:code)).to be_a_new(Code)
     end
+
+    describe "when game was started or finished" do
+
+      it "tries to create a new Code when game was started" do
+        Game.find(game.id).update(state: UserGame::CURRENT)
+        get :new, {task: task.id}, valid_session
+        expect(response).to redirect_to(task_path(task))
+      end
+
+      it "tries to create a new Code when game was finished" do
+        Game.find(game.id).update(state: UserGame::COMPLETED)
+        get :new, {task: task.id}, valid_session
+        expect(response).to redirect_to(task_path(task))
+      end
+
+
+    end
+
+
   end
 
   describe "GET edit" do
@@ -50,6 +80,8 @@ describe CodesController do
       @code_post_invalid = invalid_attributes.attributes
       @code_post_invalid[:task] = task.id
     end
+
+
     describe "with valid params" do
       it "creates a new Code" do
         expect {
@@ -86,9 +118,7 @@ describe CodesController do
 
   describe "PUT update" do
     describe "with valid params" do
-      #before (:each) do
 
-      #end
       it "updates the requested code" do
         expect_any_instance_of(Code).to receive(:update).with({ "code_string" => valid_attributes.code_string })
         put :update, {id: code.id, code: { "code_string" => valid_attributes.code_string }}, valid_session

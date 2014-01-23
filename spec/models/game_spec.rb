@@ -58,22 +58,38 @@ describe Game do
 
     end
 
+    describe "more then one code" do
 
-    describe "assign next task" do
-      let!(:new_task) {create :task, task_text: "sdgbhdrhndrbhzsgfr"}
       let!(:new_code) {create :code, code_string: "dfbdfbndfgnhdfgdfh"}
-      let(:new_user_task) {build :user_task, user: user, task: new_task}
-      let!(:new_task_code) {create :task_code, task: new_task, code: new_code}
-      let!(:new_task_game) {create :game_task, game: game, task: new_task}
 
-      it "creates a new CodeCompare and change task" do
-        expect(game.process(user, task, "1234567890") == "Code was matched. Next task assigned")
-        expect(UserTask.last.task_id).to eq(new_task.id)
+      describe "with second code" do
+
+        let!(:second_task_code) {create :task_code, task: task, code: new_code}
+
+        it "creates code compare without ending game or changing task" do
+          count = CodeCompare.count
+          expect(game.process(user, task, code.code_string) == "Code was matched")
+          expect(CodeCompare.count).to equal(count + 1)
+        end
+
       end
-      it "code compare processing and change task" do
-        expect(game.process(user, task, code.code_string) == "Code was matched. Next task assigned")
-        expect(UserTask.last.task_id).to eq(new_task.id)
+
+      describe "assign next task" do
+        let!(:new_task) {create :task, task_text: "sdgbhdrhndrbhzsgfr"}
+        let(:new_user_task) {build :user_task, user: user, task: new_task}
+        let!(:new_task_code) {create :task_code, task: new_task, code: new_code}
+        let!(:new_task_game) {create :game_task, game: game, task: new_task}
+
+        it "creates a new CodeCompare and change task" do
+          expect(game.process(user, task, "1234567890") == "Code was matched. Next task assigned")
+          expect(UserTask.last.task_id).to eq(new_task.id)
+        end
+        it "code compare processing and change task" do
+          expect(game.process(user, task, code.code_string) == "Code was matched. Next task assigned")
+          expect(UserTask.last.task_id).to eq(new_task.id)
+        end
       end
+
     end
   end
   describe "Start and finish game" do
@@ -100,8 +116,13 @@ describe Game do
 
       let(:task1) {create :task}
       let!(:user_task1) {create :user_task, user: user, task: task1, result: 3}
+      let!(:game_task1) {create :game_task, game: game, task: task1}
       #user_task1 = FactoryGirl.create(:user_task, task_id: @task1.to_param, user_id: @user.to_param, result: 3)
 
+      before(:each) do
+        Game.find(game.id).update(state: UserGame::CURRENT)
+        UserGame.where(user_id: user.id, game_id: game.id).first.update(state: UserGame::CURRENT)
+      end
 
       it "check game status as equal to COMPLETED" do
         game.finish_game

@@ -14,10 +14,10 @@ table class="table table-striped"
       -if !current_admin_user && game.state < 0
         -next
       tr
-        -if current_admin_user
-          td= link_to game.title, game_path(game)
-        else
+        -if !current_admin_user
           td= game.title
+        -else
+          td= link_to game.title, game_path(game)
         td= game.start_date
         -if current_admin_user
           -if game.state == 0

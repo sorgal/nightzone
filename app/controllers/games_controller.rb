@@ -1,9 +1,10 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game, :check_game_status, :finish_game, :check_task]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :start_game, :check_game_status, :finish_game, :check_task_and_game, :check_started]
   skip_before_filter :authorize_admin, only: [:index, :show]
   before_filter :authenticate_admin_or_user, only: [:show]
   before_filter :check_game_status, only: [:show]
-  before_filter :check_tasks, only: [:start_game]
+  before_filter :check_tasks_and_game, only: [:start_game]
+  before_filter :check_started, only: [:finish_game]
 
   # GET /games
   # GET /games.json
@@ -19,10 +20,13 @@ class GamesController < ApplicationController
       @status = "Wait"
     elsif @game.state > 0
       @status = "Started"
-      @task = current_user.tasks.first
-      @arr = @game.get_task_codes_count(@task, current_user)
-      @code_compares_count = @arr[0]
-      @task_codes_count = @arr[1]
+      if user_signed_in?
+        @user_game = current_user.user_games.where(game_id: @game.id).first
+        @task = current_user.tasks.last
+        @arr = @game.get_task_codes_count(@task, current_user)
+        @code_compares_count = @arr[0]
+        @task_codes_count = @arr[1]
+      end
     elsif @game.state < 0
       @status = "Finished"
     end
@@ -96,12 +100,12 @@ class GamesController < ApplicationController
     #Заглушки для отложенных задач
     def start_game
       @game.start_game
-      redirect_to games_path
+      redirect_to game_path(@game), notice: "Game was started"
     end
 
     def finish_game
       @game.finish_game
-      redirect_to games_path
+      redirect_to game_path(@game), notice: "Game was finished"
     end
 
   protected
@@ -118,9 +122,29 @@ class GamesController < ApplicationController
     end
   end
 
-  def check_tasks
+  def check_tasks_and_game
     if @game.tasks.count == 0
       redirect_to game_path(@game.id), notice: "You can't start game without tasks"
+    elsif @game.state == UserGame::CURRENT
+      redirect_to game_path(@game.id), notice: "This game was already started"
+    elsif @game.state == UserGame::COMPLETED
+      redirect_to game_path(@game.id), notice: "This game was already finished"
+    else
+      tasks = @game.tasks
+      tasks.each do |task|
+        if task.codes.count == 0
+          redirect_to game_path(@game.id), notice: "You can't start game without codes for game's tasks"
+          break
+        end
+      end
+    end
+  end
+
+  def check_started
+    if @game.state == 0
+      redirect_to game_path(@game.id), notice: "You can't finish this game, because it was not started "
+    elsif @game.state < 0
+      redirect_to game_path(@game.id), notice: "You can't finish this game, because it was finished already "
     end
   end
 

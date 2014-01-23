@@ -90,7 +90,9 @@ class HintsController < ApplicationController
       unless params.require(:task)
           redirect_to games_path
       end
-
+      if Task.find(params.require(:task).to_i).game.state != 0
+        redirect_to task_path(Task.find(params.require(:task).to_i)), notice: "You can't add new hints to tasks assigned with started or finished game"
+      end
     end
 
     def check_task_create

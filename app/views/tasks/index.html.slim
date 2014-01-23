@@ -7,6 +7,7 @@ table class="table table-striped"
       th= "Show"
       th= model_class.human_attribute_name(:task_text)
       th= model_class.human_attribute_name(:points)
+      th= "Game"
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @tasks.each do |task|
@@ -14,6 +15,7 @@ table class="table table-striped"
         td= link_to "Show", task_path(task)
         td= task.task_text
         td= task.points
+        td= link_to task.game.title, game_path(task.game)
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_task_path(task), :class => 'btn btn-mini'
 
