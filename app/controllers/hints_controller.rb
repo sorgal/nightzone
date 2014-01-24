@@ -21,8 +21,7 @@ class HintsController < ApplicationController
     @task = params[:task].to_i
     @cant_add = false
     if TaskHint.where(task_id: @task).count == 2
-      @cant_add = true
-      @error =  "You can assign only two hints for one task"
+      redirect_to task_path(@task), notice: "Only two hints can be assigned with one task"
     end
     @hint = Hint.new
   end
@@ -93,6 +92,7 @@ class HintsController < ApplicationController
       if Task.find(params.require(:task).to_i).game.state != 0
         redirect_to task_path(Task.find(params.require(:task).to_i)), notice: "You can't add new hints to tasks assigned with started or finished game"
       end
+
     end
 
     def check_task_create
@@ -111,7 +111,7 @@ class HintsController < ApplicationController
         #  end
         #els
         if @task.hints.count >= 2
-          redirect_to tasks_path, notice: "Only two hints can be assigned with one task"
+          redirect_to task_path(@task), notice: "Only two hints can be assigned with one task"
         end
       end
     end

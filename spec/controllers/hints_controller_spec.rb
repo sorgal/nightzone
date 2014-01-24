@@ -15,10 +15,23 @@ describe HintsController do
 
   let(:valid_attributes) {build :hint, hint_text: "dzfvbzjfgnarmkgnhbmargtgbhsergnerf;"}
 
+  let(:new_hint) {create :hint}
+
+  let!(:game) {create :game}
+
+  let!(:task_game) {create :game_task, task: task, game: game}
+
+  before(:each) do
+    @hint_post = new_hint.attributes
+    @hint_post[:task] = task.id
+    @hint_post_invalid = invalid_attributes.attributes
+    @hint_post_invalid[:task] = task.id
+  end
+
   describe "GET index" do
     it "assigns all hints as @hints" do
       get :index, {}, valid_session
-      expect(assigns(:hints)).to eq([hint])
+      expect(assigns(:hints)).to eq([hint, new_hint])
     end
   end
 
@@ -31,11 +44,6 @@ describe HintsController do
   end
 
   describe "GET new" do
-
-
-    let!(:game) {create :game}
-
-    let!(:task_game) {create :game_task, task: task, game: game}
 
     it "assigns a new hint as @hint" do
       get :new, {task: task.id}, valid_session
@@ -60,6 +68,38 @@ describe HintsController do
 
   end
 
+  describe "new and create actions performing when queue number <= 0 and try to create third task hint" do
+
+    describe "with queue_number <= 0" do
+      it "tries to create" do
+          @hint_post[:queue_number] = 0
+          expect {
+            post :create, {:hint => @hint_post}, valid_session
+          }.to change(Hint, :count).by(0)
+          expect(response).to redirect_to(new_hint_path(task: task.id))
+        end
+    end
+
+    describe "try to create third task hint and try to access new action" do
+
+      let!(:new_task_hint) {create :task_hint, task: task, hint: new_hint}
+
+      it "creates third hint" do
+        expect {
+          post :create, {hint: @hint_post}, valid_session
+        }.to change(Hint, :count).by(0)
+        expect(response).to redirect_to(task_path(task))
+      end
+
+      it "tries to new action access" do
+        get :new, {task: task.id}, valid_session
+        expect(response).to redirect_to(task_path(task))
+      end
+
+    end
+
+  end
+
   describe "GET edit" do
     it "assigns the requested hint as @hint" do
       get :edit, {id: hint.id}, valid_session
@@ -69,26 +109,7 @@ describe HintsController do
 
   describe "POST create" do
 
-    before(:each) do
-      @hint_post = new_hint.attributes
-      @hint_post[:task] = task.id
-      @hint_post_invalid = invalid_attributes.attributes
-      @hint_post_invalid[:task] = task.id
-    end
-
     let(:new_hint) {create :hint, queue_number: 3 - hint.queue_number}
-
-    describe "third task hint" do
-
-      let!(:new_task_hint) {create :task_hint, task: task, hint: new_hint}
-
-      it "creates a third Hint" do
-        expect {
-          post :create, {:hint => @hint_post}, valid_session
-        }.to change(Hint, :count).by(0)
-      end
-
-    end
 
     describe "with valid params" do
       it "creates a new Hint" do
