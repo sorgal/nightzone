@@ -21,7 +21,8 @@ class Game < ActiveRecord::Base
           if new_code_compare.save
             notice = "Code was matched"
             if all_codes_input?
-              notice += ". #{next_task(@task.points - @user.hints.count)}"
+              task_hints_ids = @task.hints.pluck(:id)
+              notice += ". #{next_task(@task.points - @user.hints.where("`hints`.`id` IN (?)", task_hints_ids).count)}"
             end
           end
         end

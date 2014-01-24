@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :raise_hint]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :raise_hint, :check_started]
   before_filter :check_game, only: [:new]
   before_filter :check_game_create, only: [:create]
   before_filter :no_tasks, except: [:new, :create]
+  before_filter :check_started, only: [:raise_hint]
   # GET /tasks
   # GET /tasks.json
   def index
@@ -101,11 +102,17 @@ class TasksController < ApplicationController
       end
     end
 
+  def check_started
+    if @task.game.state <= 0
+      redirect_to task_path(@task), notice: "You can't raise hints for this task because this task's game was not raised"
+    end
+  end
+
   public
     #еще заглушка
     def raise_hint
-      @task.raise_hint
-      redirect_to tasks_path
+      notice = @task.raise_hint
+      redirect_to task_path(@task), notice: notice
     end
 
 end

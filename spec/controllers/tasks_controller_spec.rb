@@ -44,6 +44,8 @@ describe TasksController do
 
   let(:hint2) {create :hint, hint_text: " wvgrawrfswf", queue_number: 2}
 
+  let!(:game_task) {create :game_task, game: game, task: task}
+
   let!(:task_hint2) {create :task_hint, task: task, hint: hint2}
 
   let(:invalid_attributes) {build :task, task_text: "впирапеи"}
@@ -189,48 +191,65 @@ describe TasksController do
   end
 
   describe "Raise hint" do
-    it "execute action " do
-      expect {
-        get "raise_hint", {id: task.id}, valid_session
-      }.to change(UserHint, :count).by(1)
+
+    describe "game is not started" do
+      it "execute action with not started game" do
+        expect {
+          get "raise_hint", {id: task.id}, valid_session
+        }.to change(UserHint, :count).by(0)
+        expect(response).to redirect_to(task_path(task))
+      end
     end
 
-    it "raises first hint" do
-      expect {
-        get "raise_hint", {id: task.id}, valid_session
-      }.to change(UserHint, :count).by(1)
-      expect(UserHint.last.hint_id).to eq(hint.id)
-      expect(UserHint.count).to eq(1)
-    end
-
-    describe "hints count > 1" do
-
-      let!(:user_hint) {create :user_hint, user: user, hint: hint}
-
+    describe "game is started" do
       before(:each) do
-        Hint.find(hint.id).update_attribute(:raised, Hint::RAISED)
+        Game.find(game.id).update(state: UserGame::CURRENT)
       end
 
-      it "raises second hint" do
+      it "execute action " do
         expect {
           get "raise_hint", {id: task.id}, valid_session
         }.to change(UserHint, :count).by(1)
-        expect(UserHint.last.hint_id).to eq(hint2.id)
-        expect(UserHint.count).to eq(2)
       end
 
-      describe "third hint" do
-        let!(:user_hint2) {create :user_hint, user: user, hint: hint2}
-        it "doesn't raise third hint" do
-          Hint.find(hint2.id).update_attribute(:raised, Hint::RAISED)
+      it "raises first hint" do
+        expect {
+          get "raise_hint", {id: task.id}, valid_session
+        }.to change(UserHint, :count).by(1)
+        expect(UserHint.last.hint_id).to eq(hint.id)
+        expect(UserHint.count).to eq(1)
+      end
+
+      describe "hints count > 1" do
+
+        let!(:user_hint) {create :user_hint, user: user, hint: hint}
+
+        before(:each) do
+          Hint.find(hint.id).update_attribute(:raised, Hint::RAISED)
+        end
+
+        it "raises second hint" do
           expect {
             get "raise_hint", {id: task.id}, valid_session
-          }.to change(UserHint, :count).by(0)
+          }.to change(UserHint, :count).by(1)
           expect(UserHint.last.hint_id).to eq(hint2.id)
           expect(UserHint.count).to eq(2)
         end
+
+        describe "third hint" do
+          let!(:user_hint2) {create :user_hint, user: user, hint: hint2}
+          it "doesn't raise third hint" do
+            Hint.find(hint2.id).update_attribute(:raised, Hint::RAISED)
+            expect {
+              get "raise_hint", {id: task.id}, valid_session
+            }.to change(UserHint, :count).by(0)
+            expect(UserHint.last.hint_id).to eq(hint2.id)
+            expect(UserHint.count).to eq(2)
+          end
+        end
       end
     end
+
   end
 
 end

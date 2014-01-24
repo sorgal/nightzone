@@ -17,7 +17,12 @@ class Task < ActiveRecord::Base
       self.user_tasks.each do |user_task|
         UserHint.create(user_id: user_task.user_id, hint_id: @hint.id)
       end
+      @hint.update(raised: Hint::RAISED)
+      notice = "Hint was raised with success"
+    else
+      notice = "All hints are rised early"
     end
+    @notice = notice
   end
 
 end

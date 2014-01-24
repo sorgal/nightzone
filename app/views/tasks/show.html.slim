@@ -12,7 +12,7 @@ p
   br
   = @task.points
 p
-  strong= 'Game:'
+  strong= 'Game (follow if you want add new task to this game):'
   br
   = link_to @game.title, game_path(@game)
 
@@ -22,7 +22,9 @@ p
   = link_to "Add code", new_code_path(task: @task.id), :class => 'btn'
 
   = link_to "Add hint", new_hint_path(task: @task.id), :class => 'btn'
-  '
+
+  = link_to "Raise hint", {controller: "tasks", action: "raise_hint", id: @task.id}, :class => 'btn'
+
   = link_to t('.edit', :default => t("helpers.links.edit")), edit_task_path(@task), :class => 'btn'
   '
   = link_to t('.destroy', :default => t("helpers.links.destroy")), task_path(@task), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

@@ -42,7 +42,7 @@ class UserGamesController < ApplicationController
 
     respond_to do |format|
       if @user_game.save
-        format.html { redirect_to user_games_url, notice: 'User game was join in game with success.' }
+        format.html { redirect_to user_games_url, notice: 'User was join in game with success.' }
         format.json { render action: 'index', status: :created, location: @user_game }
       else
         format.html { redirect_to root_path }
