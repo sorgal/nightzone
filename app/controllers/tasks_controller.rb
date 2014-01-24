@@ -104,7 +104,7 @@ class TasksController < ApplicationController
 
   def check_started
     if @task.game.state <= 0
-      redirect_to task_path(@task), notice: "You can't raise hints for this task because this task's game was not raised"
+      redirect_to task_path(@task), notice: "You can't raise hints for this task because this task's game was not started"
     end
   end
 

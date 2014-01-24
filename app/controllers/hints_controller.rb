@@ -101,12 +101,16 @@ class HintsController < ApplicationController
       end
       task = params.require(:hint)[:task].to_i
       @task = Task.find(task)
+      if params.require(:hint)[:queue_number].to_i <= 0
+        redirect_to new_hint_path(task: @task.id), notice: "Parameter Queue number must be greater than 0"
+      end
       if @task.hints.count > 0
-        if (@task.hints.count == 1)
-          if @task.hints.first.queue_number == params.require(:hint)[:queue_number].to_i
-            redirect_to new_hint_path(task: @task.id), notice: "Parameter Queue number must be equal to " +  (3 - params.require(:hint)[:queue_number].to_i).to_s
-          end
-        elsif @task.hints.count >= 2
+        #if (@task.hints.count == 1)
+        #  if @task.hints.first.queue_number == params.require(:hint)[:queue_number].to_i
+        #    redirect_to new_hint_path(task: @task.id), notice: "Parameter Queue number must be greater than" +  params.require(:hint)[:queue_number]
+        #  end
+        #els
+        if @task.hints.count >= 2
           redirect_to tasks_path, notice: "Only two hints can be assigned with one task"
         end
       end
