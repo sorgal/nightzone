@@ -69,3 +69,5 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'poltergeist'
 gem 'faye-rails', '~> 1.0.6'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem "ckeditor"

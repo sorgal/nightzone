@@ -8,6 +8,10 @@
     .controls
       = f.text_field :points, :class => 'text_field'
   = f.hidden_field :game, value: @game
+  .control-group
+    = f.label :description, :class => 'control-label'
+    .controls
+      = f.cktext_area :description, :id => "sometext", :cols => 40, :ckeditor => {:uiColor => "#AADC6E", :toolbar => "full"}
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '

@@ -66,6 +66,8 @@ Nightzone::Application.routes.draw do
     get "raise_hint/:id" => "tasks#raise_hint"
   end
 
+  mount Ckeditor::Engine => "/ckeditor"
+
   #get "home/game_tasks_compares"
   #post "home/create_code_compare"
   devise_for :admin_users, ActiveAdmin::Devise.config

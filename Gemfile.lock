@@ -16,6 +16,16 @@ GIT
       ransack (~> 1.0)
       sass-rails
 
+GIT
+  remote: git://github.com/thoughtbot/paperclip.git
+  revision: f7938d9582c40e710351982dffe1b3280a65d46a
+  specs:
+    paperclip (3.5.3)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,7 +71,14 @@ GEM
       xpath (~> 2.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    ckeditor (4.0.8)
+      mime-types
+      orm_adapter
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
     cliver (0.3.2)
+    cocaine (0.5.3)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -282,6 +299,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   capybara
+  ckeditor
   coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner
@@ -292,6 +310,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   mysql2
+  paperclip!
   poltergeist
   rails (= 4.0.2)
   rspec-rails (~> 3.0.0.beta)

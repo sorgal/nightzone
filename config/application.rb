@@ -24,5 +24,6 @@ module Nightzone
       Devise::SessionsController.skip_before_filter :authorize_admin
       Devise::RegistrationsController.skip_before_filter :authorize_admin
     end
+    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
   end
 end
