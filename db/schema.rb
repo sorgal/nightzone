@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20140127031747) do
   create_table "user_tasks", force: true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
-    t.integer  "result",     default: -1
+    t.integer  "result",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

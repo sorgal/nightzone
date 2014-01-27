@@ -23,10 +23,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_form.html.slim" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/hints/_form.html.slim">
+      <file leaf-file-name="index.html.slim" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/home/index.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="27" selection-start="176" selection-end="176" vertical-scroll-proportion="0.077220075" vertical-offset="0" max-vertical-offset="777">
+            <state line="27" column="42" selection-start="846" selection-end="846" vertical-scroll-proportion="0.5212355" vertical-offset="0" max-vertical-offset="777">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ability.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/ability.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="8" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
               <folding />
             </state>
           </provider>
@@ -42,9 +51,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/features/games/games.feature" />
-        <option value="$PROJECT_DIR$/spec/support/controller_macros.rb" />
-        <option value="$PROJECT_DIR$/app/realtime/realtime_chat_controller.rb" />
         <option value="$PROJECT_DIR$/app/realtime/realtime_message_controller.rb" />
         <option value="$PROJECT_DIR$/Gemfile.lock" />
         <option value="$PROJECT_DIR$/db/schema.rb" />
@@ -60,9 +66,7 @@
         <option value="$PROJECT_DIR$/app/controllers/codes_controller.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/codes_controller_spec.rb" />
         <option value="$PROJECT_DIR$/app/views/games/index.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/home/index.html.slim" />
         <option value="$PROJECT_DIR$/app/views/user_games/index.html.slim" />
-        <option value="$PROJECT_DIR$/app/controllers/games_controller.rb" />
         <option value="$PROJECT_DIR$/app/admin/dashboard.rb" />
         <option value="$PROJECT_DIR$/app/admin/admin_user.rb" />
         <option value="$PROJECT_DIR$/config/initializers/active_admin.rb" />
@@ -79,7 +83,6 @@
         <option value="$PROJECT_DIR$/spec/controllers/tasks_controller_spec.rb" />
         <option value="$PROJECT_DIR$/app/models/task.rb" />
         <option value="$PROJECT_DIR$/app/models/game.rb" />
-        <option value="$PROJECT_DIR$/app/views/games/_form.html.slim" />
         <option value="$PROJECT_DIR$/app/views/codes/new.html.slim" />
         <option value="$PROJECT_DIR$/app/controllers/tasks_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/hints/new.html.slim" />
@@ -88,11 +91,17 @@
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/tasks/_form.html.slim" />
         <option value="$PROJECT_DIR$/app/views/tasks/show.html.slim" />
-        <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.slim" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/views/hints/_form.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.slim" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js.coffee" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
+        <option value="$PROJECT_DIR$/app/controllers/games_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/games/_form.html.slim" />
+        <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/db/migrate/20140127121648_add_admin_to_users.rb" />
+        <option value="$PROJECT_DIR$/app/models/ability.rb" />
+        <option value="$PROJECT_DIR$/app/views/home/index.html.slim" />
       </list>
     </option>
   </component>
@@ -172,6 +181,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -212,7 +253,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hints" />
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -227,6 +268,60 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nightzone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -513,26 +608,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/codes/edit.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="777" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/task_hints_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="27" selection-start="177" selection-end="177" vertical-scroll-proportion="0.14981273" vertical-offset="0" max-vertical-offset="801" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/code_compares_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="2404" selection-end="2404" vertical-scroll-proportion="0.5131086" vertical-offset="564" max-vertical-offset="1365" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/codes_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="54" selection-start="1336" selection-end="1336" vertical-scroll-proportion="0.6179775" vertical-offset="300" max-vertical-offset="2595" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/code.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165" />
@@ -543,11 +618,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="764" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/index.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="24" selection-start="613" selection-end="613" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="495" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/games/index.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="16" selection-start="612" selection-end="612" vertical-scroll-proportion="0.37303665" vertical-offset="0" max-vertical-offset="764" />
@@ -556,11 +626,6 @@
     <entry file="file://$PROJECT_DIR$/app/views/games/edit.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="4" selection-start="4" selection-end="4" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="777" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="64" selection-start="1443" selection-end="1443" vertical-scroll-proportion="0.37182742" vertical-offset="487" max-vertical-offset="2355" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/user_games/index.html.slim">
@@ -658,19 +723,9 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="764" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/games/_code_compare_form.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.077220075" vertical-offset="0" max-vertical-offset="777" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/codes/show.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="64" selection-start="271" selection-end="271" vertical-scroll-proportion="0.17670158" vertical-offset="0" max-vertical-offset="764" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/games/_form.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="608" selection-end="608" vertical-scroll-proportion="0.27027026" vertical-offset="0" max-vertical-offset="777" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/hints/show.html.slim">
@@ -737,13 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="31" selection-start="1020" selection-end="1020" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/tasks/show.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="0" selection-start="1149" selection-end="1149" vertical-scroll-proportion="0.58900523" vertical-offset="0" max-vertical-offset="764">
@@ -765,25 +813,81 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hints/_form.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="27" selection-start="176" selection-end="176" vertical-scroll-proportion="0.077220075" vertical-offset="0" max-vertical-offset="777">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/code_compares.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="801">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/bootstrap.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="7" selection-start="0" selection-end="9" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="1242" selection-end="1242" vertical-scroll-proportion="0.4515707" vertical-offset="0" max-vertical-offset="1125">
+        <state line="61" column="0" selection-start="2711" selection-end="2711" vertical-scroll-proportion="-28.083334" vertical-offset="241" max-vertical-offset="1005">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="694" selection-end="694" vertical-scroll-proportion="0.31835207" vertical-offset="0" max-vertical-offset="801">
+        <state line="16" column="18" selection-start="693" selection-end="693" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
           <folding>
-            <element signature="n#!!doc" expanded="false" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/hints/_form.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/games/_code_compare_form.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="27" selection-start="176" selection-end="176" vertical-scroll-proportion="0.077220075" vertical-offset="0" max-vertical-offset="777">
+        <state line="4" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.077220075" vertical-offset="0" max-vertical-offset="777">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/_form.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="20" selection-start="301" selection-end="301" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="46" selection-start="1172" selection-end="1172" vertical-scroll-proportion="0.0" vertical-offset="369" max-vertical-offset="1185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="41" selection-start="1291" selection-end="1303" vertical-scroll-proportion="0.27664974" vertical-offset="487" max-vertical-offset="2355">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/ability.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="8" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/index.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="42" selection-start="846" selection-end="846" vertical-scroll-proportion="0.5212355" vertical-offset="0" max-vertical-offset="777">
           <folding />
         </state>
       </provider>

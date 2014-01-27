@@ -59,12 +59,3 @@ html lang="en"
                 li= link_to "Tasks", tasks_path
                 li= link_to "Codes", codes_path
                 li= link_to "Hints", hints_path
-javascript:
-  $(document).ready(function() {
-    if ($('textarea').length > 0) {
-        var data = $('textarea');
-        $.each(data, function(i) {
-            CKEDITOR.replace(data[i].id);
-        });
-    }
-  });
