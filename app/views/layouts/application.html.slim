@@ -17,7 +17,7 @@ html lang="en"
     = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
-
+    = javascript_include_tag 'ckeditor/ckeditor.js'
 
 
   body
@@ -59,3 +59,12 @@ html lang="en"
                 li= link_to "Tasks", tasks_path
                 li= link_to "Codes", codes_path
                 li= link_to "Hints", hints_path
+javascript:
+  $(document).ready(function() {
+    if ($('textarea').length > 0) {
+        var data = $('textarea');
+        $.each(data, function(i) {
+            CKEDITOR.replace(data[i].id);
+        });
+    }
+  });

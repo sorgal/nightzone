@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127031748) do
+ActiveRecord::Schema.define(version: 20140127031747) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -105,6 +105,11 @@ ActiveRecord::Schema.define(version: 20140127031748) do
     t.integer  "raised",       default: 0
   end
 
+  create_table "messages", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "task_codes", force: true do |t|
     t.integer  "task_id"
     t.integer  "code_id"
@@ -124,10 +129,6 @@ ActiveRecord::Schema.define(version: 20140127031748) do
     t.integer  "points"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description_file_name"
-    t.string   "description_content_type"
-    t.integer  "description_file_size"
-    t.datetime "description_updated_at"
   end
 
   create_table "user_games", force: true do |t|
@@ -149,7 +150,7 @@ ActiveRecord::Schema.define(version: 20140127031748) do
   create_table "user_tasks", force: true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
-    t.integer  "result",     default: 0
+    t.integer  "result",     default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

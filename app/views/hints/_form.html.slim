@@ -2,7 +2,7 @@
   .control-group
     = f.label :hint_text, :class => 'control-label'
     .controls
-      = f.text_field :hint_text, :class => 'text_field'
+      = f.cktext_area :hint_text, :id => "sometext", :cols => 40, :ckeditor => {:uiColor => "#AADC6E", :toolbar => "full"}
   .control-group
     = f.label :queue_number, :class => 'control-label'
     .controls

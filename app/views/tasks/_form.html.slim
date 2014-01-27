@@ -2,16 +2,12 @@
   .control-group
     = f.label :task_text, :class => 'control-label'
     .controls
-      = f.text_field :task_text, :class => 'text_field'
+      = f.cktext_area :task_text, :id => "sometext", :cols => 40, :ckeditor => {:uiColor => "#AADC6E", :toolbar => "full"}
   .control-group
     = f.label :points, :class => 'control-label'
     .controls
       = f.text_field :points, :class => 'text_field'
-  = f.hidden_field :game, value: @game
-  .control-group
-    = f.label :description, :class => 'control-label'
-    .controls
-      = f.cktext_area :description, :id => "sometext", :cols => 40, :ckeditor => {:uiColor => "#AADC6E", :toolbar => "full"}
+  = f.hidden_field :game, value: @game   
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '
