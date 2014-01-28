@@ -232,4 +232,7 @@ ActiveAdmin.setup do |config|
   # config.filters = true
 
   config.skip_before_filter :authorize_admin
+  config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  config.cancan_ability_class = "AdminAbility"
+
 end

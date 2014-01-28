@@ -8,7 +8,7 @@ class Ability
     @user = user
 
     if @user
-      can :manage, :all
+      can :read, :all
     end
 
 

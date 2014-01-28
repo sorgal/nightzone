@@ -10,4 +10,13 @@ class ApplicationController < ActionController::Base
       redirect_to "/admin/login"
     end
   end
+
+  def current_ability
+    if current_admin_user
+      @current_ability ||= AdminAbility.new(current_admin_user)
+    else
+      @current_ability ||= Ability.new(current_user)
+    end
+  end
+
 end
