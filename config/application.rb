@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require "net/http"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,7 +21,7 @@ module Nightzone
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     Paperclip.options[:command_path] = "/usr/bin/"
-    config.app_generators.scaffold_controller = :scaffold_controller
+    #config.app_generators.scaffold_controller = :scaffold_controller
     config.to_prepare do
       Devise::SessionsController.skip_before_filter :authorize_admin
       Devise::RegistrationsController.skip_before_filter :authorize_admin

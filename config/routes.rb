@@ -1,5 +1,7 @@
 Nightzone::Application.routes.draw do
 
+  resources :articles
+
   controller :user_hints do
     post 'user_hints/', :to => 'user_hints#create'
     delete 'user_hints/:id', :to => 'user_hints#destroy'
