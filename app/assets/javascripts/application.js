@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
-//= require faye
 //= require_tree .
 $(document).ready(function() {
     if ($('textarea').length > 0) {
