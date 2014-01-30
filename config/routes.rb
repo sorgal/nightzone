@@ -1,7 +1,5 @@
 Nightzone::Application.routes.draw do
 
-  resources :articles
-
   controller :user_hints do
     post 'user_hints/', :to => 'user_hints#create'
     delete 'user_hints/:id', :to => 'user_hints#destroy'
@@ -129,7 +127,7 @@ Nightzone::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
+  get '/home/sendbc' => 'home#sendbc'
   root :to => "home#index"
 
 end

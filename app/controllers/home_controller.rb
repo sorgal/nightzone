@@ -8,4 +8,11 @@ class HomeController < ApplicationController
       @user_games = current_user.user_games
     end
   end
+
+  def sendbc
+    message = {:channel => '/games', :data => "alert(1)"}
+    uri = URI.parse("http://localhost:9292/faye")
+    Net::HTTP.post_form(uri, :message => message.to_json)
+    head :ok
+  end
 end

@@ -28,19 +28,4 @@
     p
       span class="redbox" Some public text
 
-div id="list"
-
-javascript:
-  $(window).load(function() {
-    var faye = new Faye.Client('http://localhost:9292/faye');
-    var dat1 = 0
-    faye.subscribe("/games/new", function(data) {
-      eval(data);
-      console.log(data);
-    });
-    faye.disable('websocket');
-  });
-
--broadcast "/games/new" do
-  javascript:
-    console.log(1)
+= link_to "Send", '/home/sendbc', remote: true

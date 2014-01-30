@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128105418) do
+ActiveRecord::Schema.define(version: 20140130101950) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -52,13 +52,6 @@ ActiveRecord::Schema.define(version: 20140128105418) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "articles", force: true do |t|
-    t.string   "title"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
@@ -101,7 +94,8 @@ ActiveRecord::Schema.define(version: 20140128105418) do
     t.datetime "start_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "state",      default: 0
+    t.integer  "state",       default: 0
+    t.text     "description"
   end
 
   create_table "hints", force: true do |t|
@@ -157,7 +151,7 @@ ActiveRecord::Schema.define(version: 20140128105418) do
   create_table "user_tasks", force: true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
-    t.integer  "result",     default: 0
+    t.integer  "result",     default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
