@@ -74,3 +74,5 @@ gem "ckeditor"
 gem "cancan"
 
 gem 'thin'
+
+gem "hairtrigger"

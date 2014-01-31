@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130101950) do
+ActiveRecord::Schema.define(version: 20140131125318) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 20140130101950) do
   create_table "user_tasks", force: true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
-    t.integer  "result",     default: -1
+    t.integer  "result",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -173,5 +173,11 @@ ActiveRecord::Schema.define(version: 20140130101950) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_trigger("games_after_delete_row_tr", :generated => true, :compatibility => 1).
+      on("games").
+      after(:delete) do
+    "DELETE `tasks`.* FROM `tasks` INNER JOIN `game_tasks` ON `game_tasks`.`game_id` = OLD.`id` WHERE `tasks`.`id` = `game_tasks`.`task_id`;"
+  end
 
 end
