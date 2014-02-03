@@ -7,10 +7,6 @@ class Game < ActiveRecord::Base
 
   validate :title, :start_date, presence: true
 
-  trigger.after(:destroy) do
-    "DELETE FROM `tasks` INNER JOIN `game_tasks` ON `game_tasks`.`game_id` = deleted.`id` WHERE `tasks`.`id` = `game_tasks`.`task_id`;"
-  end
-
   def process(user, task, try_text)
     @user = user
     @task = task
