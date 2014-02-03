@@ -51,6 +51,7 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.save
         if AdminGame.create(admin_user_id: current_admin_user.id, game_id: @game.id)
+          PygmentsWorker.perform_async
           format.html { redirect_to @game, notice: 'Game was successfully created.' }
           format.json { render action: 'show', status: :created, location: @game }
         end

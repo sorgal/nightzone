@@ -76,3 +76,6 @@ gem "cancan"
 gem 'thin'
 
 gem "hairtrigger"
+
+gem 'sidekiq'
+gem 'sinatra', require: false
